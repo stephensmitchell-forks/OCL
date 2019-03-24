@@ -132,7 +132,7 @@ public class BallCutter : MillingCutter
 		protected new bool generalEdgePush(Fiber f, Interval i, Point p1, Point p2)
 		{
 			bool result = false;
-			if (isZero_tol((p2 - p1).xyNorm()))
+			if (GlobalMembers.isZero_tol((p2 - p1).xyNorm()))
 			{ // this would be a vertical edge
 				return result;
 			}
@@ -166,7 +166,7 @@ public class BallCutter : MillingCutter
 			double discr = b * b - 4 * a * c;
 			double t1;
 			double t2;
-			if (isZero_tol(discr))
+			if (GlobalMembers.isZero_tol(discr))
 			{ // tangent case, only one root
 				t1 = -b / (2 * a);
 				if (calcCCandUpdateInterval(t1, p1, p2, f, i))

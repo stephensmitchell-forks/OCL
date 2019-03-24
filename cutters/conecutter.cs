@@ -99,12 +99,12 @@ public class ConeCutter : MillingCutter
 		{
 			bool result = false;
 			Point normal = t.upNormal(); // facet surface normal
-			if (isZero_tol(normal.z)) // vertical surface
+			if (GlobalMembers.isZero_tol(normal.z)) // vertical surface
 			{
 				return false; //can't drop against vertical surface
 			}
 
-			if ((isZero_tol(normal.x)) && (isZero_tol(normal.y)))
+			if ((GlobalMembers.isZero_tol(normal.x)) && (GlobalMembers.isZero_tol(normal.y)))
 			{ // horizontal plane special case
 				CCPoint cc_tmp = new CCPoint(cl.x, cl.y, t.p[0].z, CCType.FACET_TIP); // so any vertex is at the correct height
 				return cl.liftZ_if_inFacet(cc_tmp.z, cc_tmp, t);
@@ -222,7 +222,7 @@ public class ConeCutter : MillingCutter
 		{
 			bool result = false;
 
-			if (isZero_tol(p2.z - p1.z)) // guard against horizontal edge
+			if (GlobalMembers.isZero_tol(p2.z - p1.z)) // guard against horizontal edge
 			{
 				return result;
 			}
@@ -237,7 +237,7 @@ public class ConeCutter : MillingCutter
 			// => t = (zheight - p1)/ (p2-p1)
 			double t_tip = (f.p1.z - p1.z) / (p2.z - p1.z);
 			Point p_tip = p1 + t_tip * (p2 - p1);
-			Debug.Assert(isZero_tol(Math.Abs(p_tip.z - f.p1.z))); // p_tip should be in plane of fiber
+			Debug.Assert(GlobalMembers.isZero_tol(Math.Abs(p_tip.z - f.p1.z))); // p_tip should be in plane of fiber
 
 			// this is where the ITO cone base exits the plane
 			double t_base = (f.p1.z + center_height - p1.z) / (p2.z - p1.z);
@@ -336,10 +336,10 @@ public class ConeCutter : MillingCutter
 				double dist = pd.xyNorm(); //distance between the circles
 
 				//Check for special cases which do not lead to solutions we want
-				bool case1 = (isZero_tol(dist) && isZero_tol(Math.Abs(radius - r_tang)));
+				bool case1 = (GlobalMembers.isZero_tol(dist) && GlobalMembers.isZero_tol(Math.Abs(radius - r_tang)));
 				bool case2 = (dist > (radius + r_tang)); //no solution. circles do not intersect
 				bool case3 = (dist < Math.Abs(radius - r_tang)); //no solution. one circle is contained in the other
-				bool case4 = (isZero_tol(dist - (radius + r_tang))); // tangent case
+				bool case4 = (GlobalMembers.isZero_tol(dist - (radius + r_tang))); // tangent case
 				if (case1 || case2 || case3 || case4)
 				{
 
@@ -403,7 +403,7 @@ public class ConeCutter : MillingCutter
 		{
 			double u;
 			double t;
-			if (xy_line_line_intersection(f.p1, f.p2, u, tang, tip, t))
+			if (GlobalMembers.xy_line_line_intersection(f.p1, f.p2, u, tang, tip, t))
 			{
 				if ((t >= 0.0) && (t <= 1.0))
 				{

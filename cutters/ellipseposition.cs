@@ -103,7 +103,7 @@ public class EllipsePosition
 //ORIGINAL LINE: bool isValid() const
 		public bool isValid()
 		{
-			if (isZero_tol(ocl.GlobalMembers.square(s) + ocl.GlobalMembers.square(t) - 1.0))
+			if (GlobalMembers.isZero_tol(ocl.GlobalMembers.square(s) + ocl.GlobalMembers.square(t) - 1.0))
 			{
 				return true;
 			}

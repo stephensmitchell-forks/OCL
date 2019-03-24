@@ -168,7 +168,7 @@ public class KDTree <BBObj> : System.IDisposable
 			Spread spr = calc_spread(tris); // calculate spread in order to know how to cut
 			double cutvalue = spr.start + spr.val / 2; // cut in the middle
 			//std::cout << " cutvalue= " << cutvalue << "\n";
-			if ((tris.Count <= bucketSize) || isZero_tol(spr.val))
+			if ((tris.Count <= bucketSize) || GlobalMembers.isZero_tol(spr.val))
 			{ // then return a bucket/leaf node
 				//std::cout << "KDNode::build_node BUCKET list.size()=" << tris->size() << "\n";
 				KDNode<BBObj> bucket; //  dim   cutv   parent   hi    lo   triangles depth

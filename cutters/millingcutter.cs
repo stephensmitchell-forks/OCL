@@ -176,13 +176,13 @@ public class MillingCutter : System.IDisposable
 		public virtual bool facetDrop(CLPoint cl, Triangle t)
 		{ // Drop cutter at (cl.x, cl.y) against facet of Triangle t
 			Point normal = t.upNormal(); // facet surface normal
-			if (isZero_tol(normal.z)) // vertical surface
+			if (GlobalMembers.isZero_tol(normal.z)) // vertical surface
 			{
 				return false; //can't drop against vertical surface
 			}
-			Debug.Assert(isPositive(normal.z));
+			Debug.Assert(GlobalMembers.isPositive(normal.z));
 
-			if ((isZero_tol(normal.x)) && (isZero_tol(normal.y)))
+			if ((GlobalMembers.isZero_tol(normal.x)) && (GlobalMembers.isZero_tol(normal.y)))
 			{ // horizontal plane special case
 				CCPoint cc_tmp = new CCPoint(cl.x, cl.y, t.p[0].z, CCType.FACET);
 				return cl.liftZ_if_inFacet(cc_tmp.z, cc_tmp, t);
@@ -222,7 +222,7 @@ public class MillingCutter : System.IDisposable
 				int end = (n + 1) % 3; // index of the end-point of the edge
 				Point p1 = t.p[start];
 				Point p2 = t.p[end];
-				if (!isZero_tol(p1.x - p2.x) || !isZero_tol(p1.y - p2.y))
+				if (!GlobalMembers.isZero_tol(p1.x - p2.x) || !GlobalMembers.isZero_tol(p1.y - p2.y))
 				{
 					double d = cl.xyDistanceToLine(p1, p2);
 					if (d <= radius) // potential contact with edge
@@ -435,7 +435,7 @@ public class MillingCutter : System.IDisposable
 				a = t.p[1].y - t.p[0].y;
 				b = t.p[2].y - t.p[0].y;
 				e = -t.p[0].y - normal_length * normal.y - xy_normal_length * xy_normal.y + fib.p1.y;
-				if (!two_by_two_solver(a,b,c,d,e,f,u,v))
+				if (!GlobalMembers.two_by_two_solver(a,b,c,d,e,f,u,v))
 				{
 					return result;
 				}
@@ -448,7 +448,7 @@ public class MillingCutter : System.IDisposable
 				// v0x + u*(v1x-v0x) + v*(v2x-v0x) + r2*nx + r1*xy_n.x = p1x + t*(p2x-p1x)
 				// =>
 				// t = 1/(p2x-p1x) * ( v0x + r2*nx + r1*xy_n.x - p1x +  u*(v1x-v0x) + v*(v2x-v0x)       )
-				Debug.Assert(!isZero_tol(fib.p2.x - fib.p1.x)); // guard against division by zero
+				Debug.Assert(!GlobalMembers.isZero_tol(fib.p2.x - fib.p1.x)); // guard against division by zero
 				double tval = (1.0 / (fib.p2.x - fib.p1.x)) * (t.p[0].x + normal_length * normal.x + xy_normal_length * xy_normal.x - fib.p1.x + u * (t.p[1].x - t.p[0].x) + v * (t.p[2].x - t.p[0].x));
 				if (tval < 0.0 || tval > 1.0)
 				{
@@ -472,7 +472,7 @@ public class MillingCutter : System.IDisposable
 				a = t.p[1].x - t.p[0].x;
 				b = t.p[2].x - t.p[0].x;
 				e = -t.p[0].x - normal_length * normal.x - xy_normal_length * xy_normal.x + fib.p1.x;
-				if (!two_by_two_solver(a,b,c,d,e,f,u,v))
+				if (!GlobalMembers.two_by_two_solver(a,b,c,d,e,f,u,v))
 				{
 					return result;
 				}
@@ -482,7 +482,7 @@ public class MillingCutter : System.IDisposable
 				{
 					return result;
 				}
-				Debug.Assert(!isZero_tol(fib.p2.y - fib.p1.y));
+				Debug.Assert(!GlobalMembers.isZero_tol(fib.p2.y - fib.p1.y));
 				double tval = (1.0 / (fib.p2.y - fib.p1.y)) * (t.p[0].y + normal_length * normal.y + xy_normal_length * xy_normal.y - fib.p1.y + u * (t.p[1].y - t.p[0].y) + v * (t.p[2].y - t.p[0].y));
 				if (tval < 0.0 || tval > 1.0)
 				{
@@ -563,13 +563,13 @@ public class MillingCutter : System.IDisposable
 			double h = p1.z - f.p1.z; // height of edge above fiber
 			if ((h > 0.0))
 			{
-				if (isZero_tol(p2.z - p1.z))
+				if (GlobalMembers.isZero_tol(p2.z - p1.z))
 				{ // this is the horizontal-edge special case
 					double eff_radius = this.width(h); // the cutter acts as a cylinder with eff_radius
 					// contact this cylinder/circle against edge in xy-plane
 					double qt; // fiber is f.p1 + qt*(f.p2-f.p1)
 					double qv; // line  is p1 + qv*(p2-p1)
-					if (xy_line_line_intersection(p1, p2, qv, f.p1, f.p2, qt))
+					if (GlobalMembers.xy_line_line_intersection(p1, p2, qv, f.p1, f.p2, qt))
 					{
 						Point q = p1 + qv * (p2 - p1); // the intersection point
 						// from q, go v-units along tangent, then eff_r*normal, and end up on fiber:
@@ -582,7 +582,7 @@ public class MillingCutter : System.IDisposable
 						Point xy_normal = xy_tang.xyPerp();
 						Point q1 = q + eff_radius * xy_normal;
 						Point q2 = q1 + (p2 - p1);
-						if (xy_line_line_intersection(q1, q2, ccv, f.p1, f.p2, clt))
+						if (GlobalMembers.xy_line_line_intersection(q1, q2, ccv, f.p1, f.p2, clt))
 						{
 							double t_cl1 = clt;
 							double t_cl2 = qt + (qt - clt);
@@ -615,7 +615,7 @@ public class MillingCutter : System.IDisposable
 			double u;
 			double v;
 			bool result = false;
-			if (xy_line_line_intersection(p1, p2, u, f.p1, f.p2, v))
+			if (GlobalMembers.xy_line_line_intersection(p1, p2, u, f.p1, f.p2, v))
 			{ // find XY-intersection btw fiber and edge
 				Point q = p1 + u * (p2 - p1); // edge/fiber intersection point, on edge
 				// Point q = f.p1 + v*(f.p2-f.p1); // q on fiber
@@ -629,7 +629,7 @@ public class MillingCutter : System.IDisposable
 				Point q2 = q1 + (p2 - p1);
 				double u_cc;
 				double t_cl;
-				if (xy_line_line_intersection(q1, q2, u_cc, f.p1, f.p2, t_cl))
+				if (GlobalMembers.xy_line_line_intersection(q1, q2, u_cc, f.p1, f.p2, t_cl))
 				{
 					double t_cl1 = t_cl; // cc_tmp1 = q +/- u_cc*(p2-p1);
 					double t_cl2 = v + (v - t_cl);

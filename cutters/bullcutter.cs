@@ -115,12 +115,12 @@ public class BullCutter : MillingCutter
 			//std::cout << " BullCutter::generalEdgePush() \n";
 			bool result = false;
 
-			if (isZero_tol((p2 - p1).xyNorm()))
+			if (GlobalMembers.isZero_tol((p2 - p1).xyNorm()))
 			{ // this would be a vertical edge
 				return result;
 			}
 
-			if (isZero_tol(p2.z - p1.z)) // this would be a horizontal edge
+			if (GlobalMembers.isZero_tol(p2.z - p1.z)) // this would be a horizontal edge
 			{
 				return result;
 			}
@@ -129,7 +129,7 @@ public class BullCutter : MillingCutter
 			// p1+t*(p2-p1) = f.p1.z+radius2   =>
 			double tplane = (f.p1.z + radius2 - p1.z) / (p2.z - p1.z); // intersect edge with plane at z = ufp1.z
 			Point ell_center = p1 + tplane * (p2 - p1);
-			Debug.Assert(isZero_tol(Math.Abs(ell_center.z - (f.p1.z + radius2))));
+			Debug.Assert(GlobalMembers.isZero_tol(Math.Abs(ell_center.z - (f.p1.z + radius2))));
 			Point major_dir = (p2 - p1);
 			Debug.Assert(major_dir.xyNorm() > 0.0);
 
@@ -149,9 +149,9 @@ public class BullCutter : MillingCutter
 				cc.type = CCType.EDGE_POS;
 				cc2.type = CCType.EDGE_POS;
 				Point cl = e.oePoint1() - new Point(0, 0, center_height);
-				Debug.Assert(isZero_tol(Math.Abs(cl.z - f.p1.z)));
+				Debug.Assert(GlobalMembers.isZero_tol(Math.Abs(cl.z - f.p1.z)));
 				Point cl2 = e.oePoint2() - new Point(0, 0, center_height);
-				Debug.Assert(isZero_tol(Math.Abs(cl2.z - f.p1.z)));
+				Debug.Assert(GlobalMembers.isZero_tol(Math.Abs(cl2.z - f.p1.z)));
 				double cl_t = f.tval(cl);
 				double cl_t2 = f.tval(cl2);
 				if (i.update_ifCCinEdgeAndTrue(cl_t, cc, p1, p2, true))
@@ -184,7 +184,7 @@ public class BullCutter : MillingCutter
 //ORIGINAL LINE: System.Tuple< double, double > singleEdgeDropCanonical(const Point& u1, const Point& u2) const
 		protected new Tuple< double, double > singleEdgeDropCanonical(Point u1, Point u2)
 		{
-			if (isZero_tol(u1.z - u2.z))
+			if (GlobalMembers.isZero_tol(u1.z - u2.z))
 			{ // horizontal edge special case
 				return new Tuple< double, double >(0, u1.z - height(u1.y));
 			}

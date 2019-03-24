@@ -201,7 +201,7 @@ public class SimpleWeave : Weave
 			//std::cout << " add_int_vertex " << "\n";
 			Vertex v = g.add_vertex(); //hedi::add_vertex( VertexProps( v_position, INT ), g);
 			g[v].position = v_position;
-			g[v].type = int;
+			g[v].type = VertexType.INTEGER;
 			Debug.Assert(g.has_edge(x_l,x_u));
 			Debug.Assert(g.has_edge(x_u,x_l));
 			Edge xe_lu = g.edge(x_l,x_u);

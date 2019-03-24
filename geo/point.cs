@@ -285,7 +285,7 @@ public class Point : System.IDisposable
 			Point pt1 = new Point(p1); // this required because of "const" arguments above.
 			Point pt2 = new Point(p2);
 			Point v = pt2 - pt1;
-			if (isZero_tol(v.xyNorm()))
+			if (GlobalMembers.isZero_tol(v.xyNorm()))
 			{ // if p1 and p2 do not make a line in the xy-plane
 				Console.Write("point.cpp: xyClosestPoint ERROR!: can't calculate closest point from \n");
 				Console.Write("point.cpp: xyClosestPoint ERROR!: *this =");
@@ -397,7 +397,7 @@ public class Point : System.IDisposable
 //ORIGINAL LINE: bool xParallel() const
 		public bool xParallel()
 		{
-			if (isZero_tol(y) && isZero_tol(z))
+			if (GlobalMembers.isZero_tol(y) && GlobalMembers.isZero_tol(z))
 			{
 				return true;
 			}
@@ -409,7 +409,7 @@ public class Point : System.IDisposable
 //ORIGINAL LINE: bool yParallel() const
 		public bool yParallel()
 		{
-			if (isZero_tol(x) && isZero_tol(z))
+			if (GlobalMembers.isZero_tol(x) && GlobalMembers.isZero_tol(z))
 			{
 				return true;
 			}

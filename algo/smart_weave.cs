@@ -103,14 +103,14 @@ public class SmartWeave : Weave
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
 								List<Interval>.Enumerator yi = find_interval_crossing_x(xf, (prev + 1));
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-								add_vertex(xf, (prev + 1), new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), FULLINT);
+								add_vertex(xf, (prev + 1), new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.FULLINT);
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
 								if ((current.Current - prev) > 2)
 								{
 //C++ TO C# CONVERTER TODO TASK: The following line was determined to be a copy assignment (rather than a reference assignment) - this should be verified and a 'CopyFrom' method should be created:
 //ORIGINAL LINE: yi = find_interval_crossing_x(xf, *(current.Current - 1));
 									yi.CopyFrom(find_interval_crossing_x(xf, (current.Current - 1)));
-									add_vertex(xf, (current.Current - 1), new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), FULLINT);
+									add_vertex(xf, (current.Current - 1), new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.FULLINT);
 								}
 							}
 //C++ TO C# CONVERTER TODO TASK: The following line was determined to be a copy assignment (rather than a reference assignment) - this should be verified and a 'CopyFrom' method should be created:
@@ -149,14 +149,14 @@ public class SmartWeave : Weave
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
 								List<Interval>.Enumerator xi = find_interval_crossing_y((prev + 1), yf);
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-								add_vertex((prev + 1), yf, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), FULLINT);
+								add_vertex((prev + 1), yf, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.FULLINT);
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
 								if ((current.Current - prev) > 2)
 								{
 //C++ TO C# CONVERTER TODO TASK: The following line was determined to be a copy assignment (rather than a reference assignment) - this should be verified and a 'CopyFrom' method should be created:
 //ORIGINAL LINE: xi = find_interval_crossing_y(*(current.Current - 1), yf);
 									xi.CopyFrom(find_interval_crossing_y((current.Current - 1), yf));
-									add_vertex((current.Current - 1), yf, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), FULLINT);
+									add_vertex((current.Current - 1), yf, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.FULLINT);
 								}
 							}
 //C++ TO C# CONVERTER TODO TASK: The following line was determined to be a copy assignment (rather than a reference assignment) - this should be verified and a 'CopyFrom' method should be created:
@@ -386,7 +386,7 @@ public class SmartWeave : Weave
 		{
 			Vertex v = g.add_vertex();
 			g[v].position = position;
-			g[v].type = CL;
+			g[v].type = VertexType.CL;
 			ival.intersections2.Add(VertexPair(v, ipos)); // ?? this makes Interval depend on the WeaveGraph type
 			clVertexSet.Add(v);
 			return new Vertex(v);
@@ -426,7 +426,7 @@ public class SmartWeave : Weave
 			Console.Write(" vertices.\n");
 			foreach (Vertex vertex in vertices)
 			{
-				if ((g[vertex].type == int) || (g[vertex].type == FULLINT))
+				if ((g[vertex].type == VertexType.INTEGER) || (g[vertex].type == VertexType.FULLINT))
 				{
 					List<Vertex> adjacent_vertices = new List<Vertex>();
 					List<Vertex>.Enumerator adj_itr;
@@ -466,7 +466,7 @@ public class SmartWeave : Weave
 							out_edges.Add(@out);
 						}
 
-						if (g[adj_itr.Current].type == CL)
+						if (g[adj_itr.Current].type == VertexType.CL)
 						{
 							g[in].prev = @out;
 							g[@out].next = in;

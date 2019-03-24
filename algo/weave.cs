@@ -99,7 +99,7 @@ public abstract class Weave : System.IDisposable
 
 				do
 				{ // traverse around the loop
-					Debug.Assert(g[current].type == CL); // we only want cl-points in the loop
+					Debug.Assert(g[current].type == VertexType.CL); // we only want cl-points in the loop
 					loop.Add(current);
 					clVertexSet.erase(current); // remove from set of unprocesser cl-verts
 					List<Edge> outEdges = g.out_edges(current); // find the edge to follow
@@ -111,7 +111,7 @@ public abstract class Weave : System.IDisposable
 					{ // following next, find a CL point
 						current = g.target(currentEdge);
 						currentEdge = g[currentEdge].next;
-					} while (g[current].type != CL);
+					} while (g[current].type != VertexType.CL);
 				} while (current != first); // end the loop when we arrive at the start
 
 				loops.Add(loop); // add the processed loop to the master list of all loops
@@ -166,7 +166,7 @@ public abstract class Weave : System.IDisposable
 			int n_internal = 0;
 			foreach (Vertex v in g.vertices())
 			{
-				if (g[v].type == CL)
+				if (g[v].type == VertexType.CL)
 				{
 					++n_cl;
 				}
