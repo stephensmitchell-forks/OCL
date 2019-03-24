@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{17595A00-9AFA-4589-8B06-38701B848CD1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenCamLib</RootNamespace>
+    <AssemblyName>OpenCamLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="algo\adaptivewaterline.cs" />
+    <Compile Include="algo\batchpushcutter.cs" />
+    <Compile Include="algo\clsurface.cs" />
+    <Compile Include="algo\fiber.cs" />
+    <Compile Include="algo\fiberpushcutter.cs" />
+    <Compile Include="algo\interval.cs" />
+    <Compile Include="algo\operation.cs" />
+    <Compile Include="algo\simple_weave.cs" />
+    <Compile Include="algo\smart_weave.cs" />
+    <Compile Include="algo\tsp.cs" />
+    <Compile Include="algo\waterline.cs" />
+    <Compile Include="algo\weave.cs" />
+    <Compile Include="algo\weave_typedef.cs" />
+    <Compile Include="algo\zigzag.cs" />
+    <Compile Include="Arrays.cs" />
+    <Compile Include="common\clfilter.cs" />
+    <Compile Include="common\halfedgediagram.cs" />
+    <Compile Include="common\kdnode.cs" />
+    <Compile Include="common\kdtree.cs" />
+    <Compile Include="common\lineclfilter.cs" />
+    <Compile Include="cutters\ballcutter.cs" />
+    <Compile Include="cutters\bullcutter.cs" />
+    <Compile Include="cutters\compositecutter.cs" />
+    <Compile Include="cutters\conecutter.cs" />
+    <Compile Include="cutters\cylcutter.cs" />
+    <Compile Include="cutters\ellipse.cs" />
+    <Compile Include="cutters\ellipseposition.cs" />
+    <Compile Include="cutters\millingcutter.cs" />
+    <Compile Include="DefineConstants.cs" />
+    <Compile Include="dropcutter\adaptivepathdropcutter.cs" />
+    <Compile Include="dropcutter\batchdropcutter.cs" />
+    <Compile Include="dropcutter\pathdropcutter.cs" />
+    <Compile Include="dropcutter\pointdropcutter.cs" />
+    <Compile Include="geo\arc.cs" />
+    <Compile Include="geo\bbox.cs" />
+    <Compile Include="geo\ccpoint.cs" />
+    <Compile Include="geo\clpoint.cs" />
+    <Compile Include="geo\line.cs" />
+    <Compile Include="geo\path.cs" />
+    <Compile Include="geo\point.cs" />
+    <Compile Include="geo\stlreader.cs" />
+    <Compile Include="geo\stlsurf.cs" />
+    <Compile Include="geo\triangle.cs" />
+    <Compile Include="GlobalMembers.cs" />
+    <Compile Include="manual.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringFunctions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
