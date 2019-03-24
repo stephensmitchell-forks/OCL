@@ -138,10 +138,10 @@ public class AdaptiveWaterline : Waterline
 		/// adaptive waterline algorithm
 		protected void adaptive_sampling_run()
 		{
-			minx = surf.bb.minpt.x - 2 cutter[0].getRadius();
-			maxx = surf.bb.maxpt.x + 2 cutter[0].getRadius();
-			miny = surf.bb.minpt.y - 2 cutter[0].getRadius();
-			maxy = surf.bb.maxpt.y + 2 cutter[0].getRadius();
+			minx = surf.bb.minpt.x - 2 * cutter.getRadius();
+			maxx = surf.bb.maxpt.x + 2 * cutter.getRadius();
+			miny = surf.bb.minpt.y - 2 * cutter.getRadius();
+			maxy = surf.bb.maxpt.y + 2 * cutter.getRadius();
 			Line line = new Line(new Point(minx, miny, zh), new Point(maxx, maxy, zh));
 			Span linespan = new LineSpan(line);
 

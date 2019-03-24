@@ -121,7 +121,7 @@ public class PathDropCutter : Operation
 		}
 
 		/// the path to follow
-		protected readonly Path path;
+		protected Path path;
 		/// the lowest z height, used when no triangles are touched, default is minimumZ = 0.0
 		protected double minimumZ;
 		/// list of CL-points

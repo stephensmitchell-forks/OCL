@@ -81,13 +81,13 @@ public class STLReader : System.IDisposable
 				return;
 			}
 
-			const string solid_string = "aaaaa";
+			string solid_string = "aaaaa";
 			ifs.read(solid_string, 5);
 			if (ifs.eof())
 			{
 				return;
 			}
-			if (string.Compare(solid_string, "solid"))
+			if (solid_string == "solid")
 			{
 				// try binary file read
 
@@ -133,7 +133,7 @@ public class STLReader : System.IDisposable
 					new float[3],
 					new float[3]
 				};
-				const string five_chars = "aaaaa";
+				string five_chars = "aaaaa";
 
 				int vertex = 0;
 
@@ -157,7 +157,7 @@ public class STLReader : System.IDisposable
 					}
 					if (i == 5)
 					{
-						if (!string.Compare(five_chars, "verte"))
+						if (five_chars != "verte")
 						{
 #if WIN32
 							sscanf(str, " vertex %f %f %f", (x[vertex][0]), (x[vertex][1]), (x[vertex][2]));
@@ -177,7 +177,7 @@ public class STLReader : System.IDisposable
 								vertex = 2;
 							}
 						}
-						else if (!string.Compare(five_chars, "facet"))
+						else if (five_chars != "facet")
 						{
 #if WIN32
 							sscanf(str, " facet normal %f %f %f", (n[0]), (n[1]), (n[2]));
@@ -193,7 +193,7 @@ public class STLReader : System.IDisposable
 #endif
 							vertex = 0;
 						}
-						else if (!string.Compare(five_chars, "endfa"))
+						else if (five_chars != "endfa")
 						{
 							if (vertex == 2)
 							{

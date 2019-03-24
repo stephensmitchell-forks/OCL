@@ -140,7 +140,9 @@ public class PointDropCutter : Operation
 					}
 				}
 			}
+            /*
 			delete(tris);
+            */
 			nCalls = calls;
 			return;
 		}

@@ -513,7 +513,7 @@ public class AlignedEllipse : Ellipse
 			double s1 = Math.Sqrt(1.0 - ocl.GlobalMembers.square(t1));
 			bool found_positive = false;
 			bool found_negative = false;
-			tmp.setDiangle(xyVectorToDiangle(s1,t1));
+			tmp.setDiangle(GlobalMembers.xyVectorToDiangle(s1,t1));
 			if (error(tmp.diangle) > 0)
 			{
 				found_positive = true;
@@ -524,7 +524,7 @@ public class AlignedEllipse : Ellipse
 				found_negative = true;
 				bpos.CopyFrom(tmp);
 			}
-			tmp.setDiangle(xyVectorToDiangle(s1,-t1));
+			tmp.setDiangle(GlobalMembers.xyVectorToDiangle(s1,-t1));
 			if (error(tmp.diangle) > 0)
 			{
 				found_positive = true;
@@ -535,7 +535,7 @@ public class AlignedEllipse : Ellipse
 				found_negative = true;
 				bpos.CopyFrom(tmp);
 			}
-			tmp.setDiangle(xyVectorToDiangle(-s1,t1));
+			tmp.setDiangle(GlobalMembers.xyVectorToDiangle(-s1,t1));
 			if (error(tmp.diangle) > 0)
 			{
 				found_positive = true;
@@ -546,7 +546,7 @@ public class AlignedEllipse : Ellipse
 				found_negative = true;
 				bpos.CopyFrom(tmp);
 			}
-			tmp.setDiangle(xyVectorToDiangle(-s1,-t1));
+			tmp.setDiangle(GlobalMembers.xyVectorToDiangle(-s1,-t1));
 			if (error(tmp.diangle) > 0)
 			{
 				found_positive = true;

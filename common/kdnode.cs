@@ -31,28 +31,28 @@ namespace ocl
 /// A k-d tree is used for searching for triangles overlapping with the cutter.
 ///
 //C++ TO C# CONVERTER TODO TASK: The original C++ template specifier was replaced with a C# generic specifier, which may not produce the same behavior:
-//ORIGINAL LINE: template < class BBObj >
-public class KDNode < BBObj > : System.IDisposable
+//ORIGINAL LINE: template < class Triangle >
+public class KDNode < Triangle > : System.IDisposable
 {
 		/// Create a node which partitions(cuts) along dimension d, at 
 		/// cut value cv, with child-nodes hi_c and lo_c.
 		/// If this is a bucket-node containing triangles, 
 		/// they are in the list tris
 		/// depth indicates the depth of the node in the tree
-		public KDNode(int d, double cv, KDNode<BBObj> parentNode, KDNode<BBObj> hi_child, KDNode<BBObj> lo_child, LinkedList< BBObj > tlist, int nodeDepth) // depth of node
+		public KDNode(int d, double cv, KDNode<Triangle> parentNode, KDNode<Triangle> hi_child, KDNode<Triangle> lo_child, LinkedList< Triangle > tlist, int nodeDepth) // depth of node
 		{
 			dim = d;
 			cutval = cv;
 			parent = parentNode;
 			hi = hi_child;
 			lo = lo_child;
-			tris = new LinkedList<BBObj>();
+			tris = new LinkedList<Triangle>();
 			depth = nodeDepth;
 			isLeaf = false;
 			if (tlist != null)
 			{
 				isLeaf = true;
-				foreach (BBObj bo in * tlist)
+				foreach (Triangle bo in tlist)
 				{
 					tris.AddLast(bo);
 				}
@@ -104,13 +104,13 @@ public class KDNode < BBObj > : System.IDisposable
 		/// Child node lo contains triangles with lower values.
 		public double cutval;
 		/// parent-node
-		public KDNode parent;
+		public KDNode<Triangle> parent;
 		/// Child-node hi.
-		public KDNode hi;
+		public KDNode<Triangle> hi;
 		/// Child-node lo.
-		public KDNode lo;
+		public KDNode<Triangle> lo;
 		/// A list of triangles, if this is a bucket-node (NULL for internal nodes)
-		public LinkedList< BBObj > tris;
+		public LinkedList< Triangle > tris;
 		/// flag to indicate leaf in the tree. Leafs or bucket-nodes contain triangles in the list tris.
 		public bool isLeaf;
 }

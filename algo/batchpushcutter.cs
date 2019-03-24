@@ -179,7 +179,7 @@ public class BatchPushCutter : Operation
             /*
 			boost::progress_display show_progress = new boost::progress_display(fibers.Count);
             */
-			foreach (Fiber f in * fibers)
+			foreach (Fiber f in fibers)
 			{
 				foreach (Triangle t in surf.tris)
 				{ // test against all triangles in s
@@ -188,7 +188,9 @@ public class BatchPushCutter : Operation
 					f.addInterval(i);
 					++nCalls;
 				}
+                /*
 				++show_progress;
+                */
 			}
 			// std::cout << "BatchPushCutter done." << std::endl;
 			return;
@@ -207,7 +209,7 @@ public class BatchPushCutter : Operation
             /*
 			boost::progress_display show_progress = new boost::progress_display(fibers.Count);
             */
-			foreach (Fiber f in * fibers)
+			foreach (Fiber f in fibers)
 			{
 				CLPoint cl = new CLPoint();
 				if (x_direction)
@@ -228,7 +230,7 @@ public class BatchPushCutter : Operation
 				}
 				overlap_triangles = root.search_cutter_overlap(cutter, cl);
 				Debug.Assert(overlap_triangles.Count <= surf.size()); // can't possibly find more triangles than in the STLSurf
-				foreach (Triangle t in * overlap_triangles)
+				foreach (Triangle t in overlap_triangles)
 				{
 					//if ( bb->overlaps( t.bb ) ) {
 						Interval i = new Interval();
@@ -237,11 +239,13 @@ public class BatchPushCutter : Operation
 						++nCalls;
 					//}
 				}
-				delete(overlap_triangles);
+                /*
+                delete(overlap_triangles);
 				++show_progress;
-			}
-			// std::cout << "BatchPushCutter2 done." << std::endl;
-			return;
+                */
+            }
+            // std::cout << "BatchPushCutter2 done." << std::endl;
+            return;
 		}
 
 		/// 3rd version of algorithm
@@ -271,7 +275,7 @@ public class BatchPushCutter : Operation
 			int n; // loop variable
 			int Nmax = fibers.Count; // the number of fibers to process
 #else
-			uint n; // loop variable
+			int n; // loop variable
 			uint Nmax = (uint)fibers.Count; // the number of fibers to process
 #endif
 			uint calls = 0;
@@ -313,7 +317,7 @@ public class BatchPushCutter : Operation
 						// todo: optimization where method-calls are skipped if triangle bbox already in the fiber
 						i = new Interval();
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-						cutter.pushCutter(fiberr[n], i,it);
+						cutter.pushCutter(fiberr[n], i,it.Current);
 						fiberr[n].addInterval(i);
 						++calls;
 						if (i != null)
@@ -322,11 +326,13 @@ public class BatchPushCutter : Operation
 						}
 					//}
 				}
-				delete(tris);
+                /*
+                delete(tris);
 				++show_progress;
-			} // OpenMP parallel region ends here
+                */
+            } // OpenMP parallel region ends here
 
-			this.nCalls = (int)calls;
+            this.nCalls = (int)calls;
 			// std::cout << "\nBatchPushCutter3 done." << std::endl;
 			return;
 		}

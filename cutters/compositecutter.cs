@@ -108,7 +108,7 @@ public class CompositeCutter : MillingCutter
 		public new bool facetDrop(CLPoint cl, Triangle t)
 		{
 			bool result = false;
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{ // loop through cutters
 				CLPoint cl_tmp = cl + new CLPoint(0, 0, zoffset[n]);
 				CCPoint cc_tmp;
@@ -145,7 +145,7 @@ public class CompositeCutter : MillingCutter
 		public new bool edgeDrop(CLPoint cl, Triangle t)
 		{
 			bool result = false;
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{ // loop through cutters
 				CLPoint cl_tmp = cl + new Point(0, 0, zoffset[n]);
 				CCPoint cc_tmp;
@@ -196,7 +196,7 @@ public class CompositeCutter : MillingCutter
 		{
 			bool result = false;
 			List< Tuple<double, CCPoint>> contacts = new List< Tuple<double, CCPoint>>();
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{
 				Interval ci = new Interval();
 				Fiber cf = new Fiber(f);
@@ -215,7 +215,7 @@ public class CompositeCutter : MillingCutter
 				}
 			}
 
-			for (uint n = 0; n < contacts.Count; ++n)
+			for (int n = 0; n < contacts.Count; ++n)
 			{
 				i.update(contacts[n].Item1, contacts[n].Item2);
 				result = true;
@@ -234,7 +234,7 @@ public class CompositeCutter : MillingCutter
 			// run facetPush for each cutter, retain valid results, and return union of all
 			bool result = false;
 			List< Tuple<double, CCPoint>> contacts = new List< Tuple<double, CCPoint>>();
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{
 				Interval ci = new Interval();
 				Fiber cf = new Fiber(f);
@@ -253,7 +253,7 @@ public class CompositeCutter : MillingCutter
 				}
 			}
 
-			for (uint n = 0; n < contacts.Count; ++n)
+			for (int n = 0; n < contacts.Count; ++n)
 			{
 				i.update(contacts[n].Item1, contacts[n].Item2);
 				result = true;
@@ -267,7 +267,7 @@ public class CompositeCutter : MillingCutter
 		{
 			bool result = false;
 			List< Tuple<double, CCPoint>> contacts = new List< Tuple<double, CCPoint>>();
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{
 				Interval ci = new Interval(); // interval for this cutter
 				Fiber cf = new Fiber(f); // fiber for this cutter
@@ -286,7 +286,7 @@ public class CompositeCutter : MillingCutter
 				}
 			}
 
-			for (uint n = 0; n < contacts.Count; ++n)
+			for (int n = 0; n < contacts.Count; ++n)
 			{
 				i.update(contacts[n].Item1, contacts[n].Item2);
 				result = true;
@@ -298,9 +298,9 @@ public class CompositeCutter : MillingCutter
 		/// convert input radius r to cutter index
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: uint radius_to_index(double r) const
-		protected uint radius_to_index(double r)
+		protected int radius_to_index(double r)
 		{
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{
 				if (validRadius(n, r))
 				{
@@ -313,9 +313,9 @@ public class CompositeCutter : MillingCutter
 
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: uint height_to_index(double h) const
-		protected uint height_to_index(double h)
+		protected int height_to_index(double h)
 		{
-			for (uint n = 0; n < cutter.Count; ++n)
+			for (int n = 0; n < cutter.Count; ++n)
 			{
 				if (validHeight(n, h))
 				{
@@ -323,7 +323,7 @@ public class CompositeCutter : MillingCutter
 				}
 			}
 			// return the last cutter if we get here...
-			return (uint)(cutter.Count - 1);
+			return (int)(cutter.Count - 1);
 			Console.Write(" Error, height= ");
 			Console.Write(h);
 			Console.Write(" has no index \n");
@@ -334,7 +334,7 @@ public class CompositeCutter : MillingCutter
 		/// return true if radius=r belongs to cutter n
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool validRadius(uint n, double r) const
-		protected bool validRadius(uint n, double r)
+		protected bool validRadius(int n, double r)
 		{
 			Debug.Assert(r >= 0.0);
 			double lolimit;
@@ -362,7 +362,7 @@ public class CompositeCutter : MillingCutter
 		// return true if height h belongs to cutter n
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool validHeight(uint n, double h) const
-		protected bool validHeight(uint n, double h)
+		protected bool validHeight(int n, double h)
 		{
 			double lolimit;
 			double hilimit;
@@ -391,7 +391,7 @@ public class CompositeCutter : MillingCutter
 //ORIGINAL LINE: double height(double r) const
 		protected new double height(double r)
 		{
-			uint idx = radius_to_index(r);
+			int idx = radius_to_index(r);
 			return cutter[idx].height(r) + zoffset[idx];
 		}
 
@@ -401,7 +401,7 @@ public class CompositeCutter : MillingCutter
 //ORIGINAL LINE: double width(double h) const
 		protected new double width(double h)
 		{
-			uint idx = height_to_index(h);
+			int idx = height_to_index(h);
 			// std::cout << "CompositeCutter::width( " << h << " ) idx=" << idx << " zoffset= " << zoffset[idx] << "\n";
 			// std::cout << " width  =  " << cutter[idx]->width( h - zoffset[idx] ) << "\n";
 			return cutter[idx].width(h - zoffset[idx]);
@@ -412,7 +412,7 @@ public class CompositeCutter : MillingCutter
 		/// between radiusvec[n-1] and radiusvec[n]
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool ccValidRadius(uint n, CLPoint& cl) const
-		protected bool ccValidRadius(uint n, CLPoint cl)
+		protected bool ccValidRadius(int n, CLPoint cl)
 		{
 			if (cl.cc.type == CCType.NONE)
 			{
@@ -446,7 +446,7 @@ public class CompositeCutter : MillingCutter
 
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool ccValidHeight(uint n, CCPoint& cc, const Fiber& f) const
-		protected bool ccValidHeight(uint n, CCPoint cc, Fiber f)
+		protected bool ccValidHeight(int n, CCPoint cc, Fiber f)
 		{
 			//if (  ((cc.z-f.p1.z) >= 0.0)  && (n == height_to_index(cc.z-f.p1.z)) )
 			if (n == height_to_index(cc.z - f.p1.z))

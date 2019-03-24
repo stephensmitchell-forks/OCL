@@ -200,7 +200,7 @@ public class BallCutter : MillingCutter
 		protected bool calcCCandUpdateInterval(double t, Point p1, Point p2, Fiber f, Interval i)
 		{
 			Point cl_center = f.point(t) + new Point(0, 0, radius); // center of ball is here
-			CCPoint cc_tmp = cl_center.closestPoint(p1, p2); // cc-point on the edge, point on edge closest to center
+			CCPoint cc_tmp = new CCPoint(cl_center.closestPoint(p1, p2)); // cc-point on the edge, point on edge closest to center
 			cc_tmp.type = CCType.EDGE_BALL;
 			// require contact with lower hemishphere
 			return i.update_ifCCinEdgeAndTrue(t, cc_tmp, p1, p2, ((cl_center - cc_tmp).z >= 0));

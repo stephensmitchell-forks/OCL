@@ -94,7 +94,7 @@ public class LineCLFilter : CLFilter
 			LinkedList<CLPoint>.Enumerator p_last_good = new ClassicLinkedListIterator(p1);
 
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-			new_list.AddLast(p0);
+			new_list.AddLast(p0.Current);
 
 			bool even_number = true;
 

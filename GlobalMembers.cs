@@ -245,7 +245,7 @@ namespace ocl
 		if ((boost::math.isnan)(diangle) != null)
 		{ // Use the Boost version
 	#else
-		if (Math.IsNaN(diangle))
+		if (double.IsNaN(diangle))
 		{ // Use the std version
 	#endif
 			Console.Write("numeric::xyVectorToDiangle() error (x,y)= (");
@@ -261,13 +261,13 @@ namespace ocl
 	}
 
 // scalar*Point
-
+/*
 	/// scalar multiplication   scalar*Point
 	public static Point operator * (double a, Point p)
 	{
 		return new Point(p) *= a;
 	}
-
+    */
 
 		internal static string str_for_Ttc;
 

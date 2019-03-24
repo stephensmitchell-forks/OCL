@@ -102,7 +102,7 @@ public class Fiber : System.IDisposable
 				List<Interval> overlaps = new List<Interval>();
 				while (itr.MoveNext())
 				{ // loop through all intervals
-					if (!(itr.outside(i)))
+					if (!(itr.Current.outside(i)))
 					{
 						overlaps.push_backitr.Current; // add overlaps here
 //C++ TO C# CONVERTER TODO TASK: There is no direct equivalent to the STL vector 'erase' method in C#:
@@ -214,14 +214,14 @@ public class Fiber : System.IDisposable
 		/// return the upper cl-point of interval n
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: Point upperCLPoint(uint n) const
-		public Point upperCLPoint(uint n)
+		public Point upperCLPoint(int n)
 		{
 			return new ocl.Point(point(ints[n].upper));
 		}
 		/// return the lower cl-point of interval n
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: Point lowerCLPoint(uint n) const
-		public Point lowerCLPoint(uint n)
+		public Point lowerCLPoint(int n)
 		{
 			return new ocl.Point(point(ints[n].lower));
 		}
@@ -248,8 +248,13 @@ public class Fiber : System.IDisposable
 			}
 		}
 
-	// DATA
-		public Point p1 = new Point(); ///< start point
+        public static bool operator !=(Fiber ImpliedObject, Fiber other)
+        {
+            return !(ImpliedObject == other);
+        }
+
+        // DATA
+        public Point p1 = new Point(); ///< start point
 		public Point p2 = new Point(); ///< end point
 		public Point dir = new Point(); ///< direction vector (normalized)
 		public List<Interval> ints = new List<Interval>(); ///< the intervals in this Fiber

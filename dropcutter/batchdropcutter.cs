@@ -151,7 +151,7 @@ public class BatchDropCutter : Operation
 			Console.Write(surf.tris.Count);
 			Console.Write(" triangles...");
 			nCalls = 0;
-			foreach (CLPoint cl in * clpoints)
+			foreach (CLPoint cl in clpoints)
 			{
 				foreach (Triangle t in surf.tris)
 				{ // test against all triangles in s
@@ -174,13 +174,15 @@ public class BatchDropCutter : Operation
 			Console.Write(" cl-points and ");
 			Console.Write(surf.tris.Count);
 			Console.Write(" triangles.\n");
+            /*
 			std::cout.flush();
+            */
 			nCalls = 0;
 			LinkedList<Triangle> triangles_under_cutter;
-			foreach (CLPoint cl in * clpoints)
+			foreach (CLPoint cl in clpoints)
 			{ //loop through each CL-point
 				triangles_under_cutter = root.search_cutter_overlap(cutter, cl);
-				foreach (Triangle t in * triangles_under_cutter)
+				foreach (Triangle t in triangles_under_cutter)
 				{
 					cutter.dropCutter(cl,t);
 					++nCalls;
@@ -191,7 +193,9 @@ public class BatchDropCutter : Operation
 			Console.Write("done. ");
 			Console.Write(nCalls);
 			Console.Write(" dropCutter() calls.\n");
+            /*
 			std::cout.flush();
+            */
 			return;
 		}
 
@@ -210,10 +214,10 @@ public class BatchDropCutter : Operation
 			boost::progress_display show_progress = new boost::progress_display(clpoints.Count);
             */
 			LinkedList<Triangle> triangles_under_cutter;
-			foreach (CLPoint cl in * clpoints)
+			foreach (CLPoint cl in clpoints)
 			{ //loop through each CL-point
 				triangles_under_cutter = root.search_cutter_overlap(cutter, cl);
-				foreach (Triangle t in * triangles_under_cutter)
+				foreach (Triangle t in triangles_under_cutter)
 				{
 					if (cutter.overlaps(cl,t))
 					{
@@ -224,7 +228,9 @@ public class BatchDropCutter : Operation
 						}
 					}
 				}
+                /*
 				++show_progress;
+                */
 				triangles_under_cutter = null;
 			}
 
@@ -251,12 +257,12 @@ public class BatchDropCutter : Operation
 			int calls = 0;
 			int ntris = 0;
 //C++ TO C# CONVERTER TODO TASK: Pointer arithmetic is detected on this variable, so pointers on this variable are left unchanged:
-			LinkedList<Triangle> * tris = new LinkedList<Triangle>();
+			LinkedList<Triangle> tris = new LinkedList<Triangle>();
 #if _WIN32 // OpenMP version 2 of VS2013 OpenMP need signed loop variable
 			int n; // loop variable
 			int Nmax = clpoints.Count;
 #else
-			uint n; // loop variable
+			int n; // loop variable
 			uint Nmax = (uint)clpoints.Count;
 #endif
 			List<CLPoint> clref = clpoints;
@@ -328,10 +334,13 @@ public class BatchDropCutter : Operation
 						}
 					}
 					ntris += tris.Count;
-					delete(tris);
-					++show_progress;
-				} // end OpenMP PARALLEL for
-			nCalls = calls;
+
+                /*
+                delete(tris);
+                ++show_progress;
+                */
+            } // end OpenMP PARALLEL for
+            nCalls = calls;
 			Console.Write(" ");
 			Console.Write(nCalls);
 			Console.Write(" dropCutter() calls.\n");
@@ -355,13 +364,13 @@ public class BatchDropCutter : Operation
 			int calls = 0;
 			int ntris = 0;
 //C++ TO C# CONVERTER TODO TASK: Pointer arithmetic is detected on this variable, so pointers on this variable are left unchanged:
-			LinkedList<Triangle> * tris = new LinkedList<Triangle>();
+			LinkedList<Triangle> tris = new LinkedList<Triangle>();
 #if _WIN32 // OpenMP version 2 of VS2013 OpenMP need signed loop variable
 			int Nmax = clpoints.Count;
 			int n; // loop variable
 #else
 			uint Nmax = (uint)clpoints.Count;
-			uint n; // loop variable
+			int n; // loop variable
 #endif
 			List<CLPoint> clref = clpoints;
 			int nloop = 0;
@@ -388,7 +397,7 @@ public class BatchDropCutter : Operation
 #endif
 					nloop++;
 					tris = new LinkedList<Triangle>(root.search_cutter_overlap(cutter, clref[n]));
-					Debug.Assert(tris);
+					Debug.Assert(tris!=null);
 					// assert( tris->size() <= ntriangles ); // can't possibly find more triangles than in the STLSurf
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
 					for (it = tris.GetEnumerator(); it != tris.end() ; ++it)
@@ -406,10 +415,13 @@ public class BatchDropCutter : Operation
 						}
 					}
 					ntris += tris.Count;
-					delete(tris);
-					++show_progress;
-				} // end OpenMP PARALLEL for
-			nCalls = calls;
+
+                /*
+                delete(tris);
+                ++show_progress;
+                */
+            } // end OpenMP PARALLEL for
+            nCalls = calls;
 			Console.Write("\n ");
 			Console.Write(nCalls);
 			Console.Write(" dropCutter() calls.\n");

@@ -119,7 +119,7 @@ public class CylCutter : MillingCutter
 
 			Point p1 = new Point();
 			Point p2 = new Point();
-			if (t.zslice_verts(p1, p2, f.p1.z))
+			if (t.zslice_verts(ref p1, ref p2, f.p1.z))
 			{
 				p1.z = f.p1.z; // z-coord should be very close to f.p1.z, but set it exactly anyway.
 				p2.z = f.p1.z;

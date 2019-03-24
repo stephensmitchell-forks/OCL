@@ -128,8 +128,10 @@ public class Point : System.IDisposable
 		{
 			if (this.norm() != 0.0)
 			{
-				this *= (1 / this.norm());
-			}
+				x *= (1 / this.norm());
+                y *= (1 / this.norm());
+                z *= (1 / this.norm());
+            }
 		}
 
 		/// distance from Point to another Point p in the XY plane
@@ -154,8 +156,9 @@ public class Point : System.IDisposable
 		{
 			if (this.xyNorm() != 0.0)
 			{
-				this *= (1 / this.xyNorm());
-			}
+				x *= (1 / this.xyNorm());
+                y *= (1 / this.xyNorm());
+            }
 		}
 
 		/// return perpendicular in the xy plane, rotated 90 degree to the left
@@ -455,7 +458,7 @@ public class Point : System.IDisposable
 			z = p.z;
 			return this;
 		}
-
+        /*
 		/// addition
 //C++ TO C# CONVERTER TODO TASK: The += operator cannot be overloaded in C#:
 		public static Point operator += (Point p)
@@ -475,13 +478,13 @@ public class Point : System.IDisposable
 			z -= p.z;
 			return this;
 		}
-
+        */
 		/// addition
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: const Point operator +(const Point &p) const
 		public static Point operator + (Point ImpliedObject, Point p)
 		{
-			return new Point(ImpliedObject) += p;
+			return new Point(ImpliedObject.x + p.x, ImpliedObject.y + p.y, ImpliedObject.z + p.z);
 		}
 
 		/// subtraction
@@ -489,11 +492,11 @@ public class Point : System.IDisposable
 //ORIGINAL LINE: const Point operator -(const Point &p) const
 		public static Point operator - (Point ImpliedObject, Point p)
 		{
-			return new Point(ImpliedObject) -= p;
-		}
+			return new Point(ImpliedObject.x - p.x, ImpliedObject.y - p.y, ImpliedObject.z - p.z);
+        }
 
 		/// scalar multiplication
-
+        /*
 		// Point*scalar multiplication
 //C++ TO C# CONVERTER TODO TASK: The *= operator cannot be overloaded in C#:
 		public static Point operator *= (double a)
@@ -503,19 +506,24 @@ public class Point : System.IDisposable
 			z *= a;
 			return this;
 		}
-
+        */
 		/// Point * scalar
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: const Point operator *(const double &a) const
 		public static Point operator * (Point ImpliedObject, double a)
 		{
-			return new Point(ImpliedObject) *= a;
+			return new Point(ImpliedObject.x * a, ImpliedObject.y * a, ImpliedObject.z * a);
 		}
 
-		/// equality
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool operator ==(const Point &p) const
-		public static bool operator == (Point ImpliedObject, Point p)
+        public static Point operator * (double a, Point ImpliedObject)
+        {
+            return new Point(ImpliedObject.x * a, ImpliedObject.y * a, ImpliedObject.z * a);
+        }
+
+        /// equality
+        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+        //ORIGINAL LINE: bool operator ==(const Point &p) const
+        public static bool operator == (Point ImpliedObject, Point p)
 		{
 			return (ImpliedObject == p) || (ImpliedObject.x == p.x && ImpliedObject.y == p.y && ImpliedObject.z == p.z);
 		}

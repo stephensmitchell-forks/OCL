@@ -81,7 +81,7 @@ public class HEDIGraph <TOutEdgeList, TVertexList, TDirected, TVertexProperties,
 
 
 
-		public TFaceProperties this[uint f]
+		public TFaceProperties this[int f]
 		{
 			get
 			{
@@ -92,9 +92,10 @@ public class HEDIGraph <TOutEdgeList, TVertexList, TDirected, TVertexProperties,
 				faces[f] = value;
 			}
 		}
+        /*
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: inline const TFaceProperties& operator [](uint f) const
-		public TFaceProperties this[uint f]
+		public TFaceProperties this[int f]
 		{
 			get
 			{
@@ -105,7 +106,7 @@ public class HEDIGraph <TOutEdgeList, TVertexList, TDirected, TVertexProperties,
 				faces[f] = value;
 			}
 		}
-
+        */
 		public TEdgeProperties this[boost::graph_traits< typename boost::adjacency_list< TOutEdgeList, TVertexList, TDirected, TVertexProperties, TEdgeProperties, TGraphProperties, TEdgeList >>.edge_descriptor e]
 		{
 			get

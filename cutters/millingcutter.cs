@@ -197,7 +197,7 @@ public class MillingCutter : System.IDisposable
 				xyNormal.xyNormalize();
 				// define the radiusvector which points from the cc-point to the cutter-center
 				Point radiusvector = this.xy_normal_length * xyNormal + this.normal_length * normal;
-				CCPoint cc_tmp = cl - radiusvector; // NOTE xy-coords right, z-coord is not.
+				CCPoint cc_tmp = new CCPoint(cl - radiusvector); // NOTE xy-coords right, z-coord is not.
 				cc_tmp.z = (1.0 / normal.z) * (-d - normal.x * cc_tmp.x - normal.y * cc_tmp.y); // cc-point lies in the plane.
 				cc_tmp.type = CCType.FACET;
 				double tip_z = cc_tmp.z + radiusvector.z - this.center_height;
@@ -330,7 +330,7 @@ public class MillingCutter : System.IDisposable
 		// general purpose vertexPush, delegates to this->width(h) 
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: virtual bool vertexPush(const Fiber& f, Interval& i, const Triangle& t) const
-		protected virtual bool vertexPush(Fiber f, Interval i, Triangle t)
+		public virtual bool vertexPush(Fiber f, Interval i, Triangle t)
 		{
 			bool result = false;
 			foreach (Point p in t.p)
@@ -374,7 +374,7 @@ public class MillingCutter : System.IDisposable
 		/// calls generalFacetPush()
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: virtual bool facetPush(const Fiber& fib, Interval& i, const Triangle& t) const
-		protected virtual bool facetPush(Fiber fib, Interval i, Triangle t)
+		public virtual bool facetPush(Fiber fib, Interval i, Triangle t)
 		{
 			return generalFacetPush(this.normal_length, this.center_height, this.xy_normal_length, fib, i, t);
 		}
@@ -427,19 +427,19 @@ public class MillingCutter : System.IDisposable
 			double f = -t.p[0].z - normal_length * normal.z + fib.p1.z + center_height;
 			// note: the xy_normal does not have a z-component, so omitted here.
 
-			double u; // u and v are coordinates of the cc-point within the triangle facet
-			double v;
+			double u=0; // u and v are coordinates of the cc-point within the triangle facet
+			double v=0;
 			// a,b,e depend on the fiber:
 			if (fib.p1.y == fib.p2.y)
 			{ // XFIBER
 				a = t.p[1].y - t.p[0].y;
 				b = t.p[2].y - t.p[0].y;
 				e = -t.p[0].y - normal_length * normal.y - xy_normal_length * xy_normal.y + fib.p1.y;
-				if (!GlobalMembers.two_by_two_solver(a,b,c,d,e,f,u,v))
+				if (!GlobalMembers.two_by_two_solver(a,b,c,d,e,f,ref u,ref v))
 				{
 					return result;
 				}
-				CCPoint cc = t.p[0] + u * (t.p[1] - t.p[0]) + v * (t.p[2] - t.p[0]);
+				CCPoint cc = new CCPoint(t.p[0] + u * (t.p[1] - t.p[0]) + v * (t.p[2] - t.p[0]));
 				cc.type = CCType.FACET;
 				if (!cc.isInside(t))
 				{
@@ -472,11 +472,11 @@ public class MillingCutter : System.IDisposable
 				a = t.p[1].x - t.p[0].x;
 				b = t.p[2].x - t.p[0].x;
 				e = -t.p[0].x - normal_length * normal.x - xy_normal_length * xy_normal.x + fib.p1.x;
-				if (!GlobalMembers.two_by_two_solver(a,b,c,d,e,f,u,v))
+				if (!GlobalMembers.two_by_two_solver(a,b,c,d,e,f,ref u,ref v))
 				{
 					return result;
 				}
-				CCPoint cc = t.p[0] + u * (t.p[1] - t.p[0]) + v * (t.p[2] - t.p[0]);
+				CCPoint cc = new CCPoint(t.p[0] + u * (t.p[1] - t.p[0]) + v * (t.p[2] - t.p[0]));
 				cc.type = CCType.FACET;
 				if (!cc.isInside(t))
 				{
@@ -508,7 +508,7 @@ public class MillingCutter : System.IDisposable
 		/// return true if a contact with an edge was found
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: virtual bool edgePush(const Fiber& f, Interval& i, const Triangle& t) const
-		protected virtual bool edgePush(Fiber f, Interval i, Triangle t)
+		public virtual bool edgePush(Fiber f, Interval i, Triangle t)
 		{
 			bool result = false;
 			for (int n = 0;n < 3;n++)
@@ -567,22 +567,22 @@ public class MillingCutter : System.IDisposable
 				{ // this is the horizontal-edge special case
 					double eff_radius = this.width(h); // the cutter acts as a cylinder with eff_radius
 					// contact this cylinder/circle against edge in xy-plane
-					double qt; // fiber is f.p1 + qt*(f.p2-f.p1)
-					double qv; // line  is p1 + qv*(p2-p1)
-					if (GlobalMembers.xy_line_line_intersection(p1, p2, qv, f.p1, f.p2, qt))
+					double qt=0; // fiber is f.p1 + qt*(f.p2-f.p1)
+					double qv=0; // line  is p1 + qv*(p2-p1)
+					if (GlobalMembers.xy_line_line_intersection(p1, p2, ref qv, f.p1, f.p2, ref qt))
 					{
 						Point q = p1 + qv * (p2 - p1); // the intersection point
 						// from q, go v-units along tangent, then eff_r*normal, and end up on fiber:
 						// q + ccv*tangent + r*normal = p1 + clt*(p2-p1)
-						double ccv;
-						double clt;
+						double ccv=0;
+						double clt=0;
 						Point xy_tang = p2 - p1;
 						xy_tang.z = 0;
 						xy_tang.xyNormalize();
 						Point xy_normal = xy_tang.xyPerp();
 						Point q1 = q + eff_radius * xy_normal;
 						Point q2 = q1 + (p2 - p1);
-						if (GlobalMembers.xy_line_line_intersection(q1, q2, ccv, f.p1, f.p2, clt))
+						if (GlobalMembers.xy_line_line_intersection(q1, q2, ref ccv, f.p1, f.p2, ref clt))
 						{
 							double t_cl1 = clt;
 							double t_cl2 = qt + (qt - clt);
@@ -612,10 +612,10 @@ public class MillingCutter : System.IDisposable
 		{
 			// push cutter along Fiber f in contact with edge p1-p2
 			// contact with cylindrical cutter shaft
-			double u;
-			double v;
+			double u = 0;
+			double v = 0;
 			bool result = false;
-			if (GlobalMembers.xy_line_line_intersection(p1, p2, u, f.p1, f.p2, v))
+			if (GlobalMembers.xy_line_line_intersection(p1, p2, ref u, f.p1, f.p2, ref v))
 			{ // find XY-intersection btw fiber and edge
 				Point q = p1 + u * (p2 - p1); // edge/fiber intersection point, on edge
 				// Point q = f.p1 + v*(f.p2-f.p1); // q on fiber
@@ -627,9 +627,9 @@ public class MillingCutter : System.IDisposable
 				Point xy_normal = xy_tang.xyPerp();
 				Point q1 = q + radius * xy_normal;
 				Point q2 = q1 + (p2 - p1);
-				double u_cc;
-				double t_cl;
-				if (GlobalMembers.xy_line_line_intersection(q1, q2, u_cc, f.p1, f.p2, t_cl))
+				double u_cc=0;
+				double t_cl=0;
+				if (GlobalMembers.xy_line_line_intersection(q1, q2, ref u_cc, f.p1, f.p2, ref t_cl))
 				{
 					double t_cl1 = t_cl; // cc_tmp1 = q +/- u_cc*(p2-p1);
 					double t_cl2 = v + (v - t_cl);
@@ -661,7 +661,7 @@ public class MillingCutter : System.IDisposable
 //ORIGINAL LINE: bool calcCCandUpdateInterval(double t, double u, const Point& q, const Point& p1, const Point& p2, const Fiber& f, Interval& i, double height, CCType cctyp) const
 		protected bool calcCCandUpdateInterval(double t, double u, Point q, Point p1, Point p2, Fiber f, Interval i, double height, CCType cctyp)
 		{
-			CCPoint cc_tmp = q + u * (p2 - p1);
+			CCPoint cc_tmp = new CCPoint(q + u * (p2 - p1));
 			cc_tmp.type = cctyp;
 			return i.update_ifCCinEdgeAndTrue(t, cc_tmp, p1, p2, (cc_tmp.z >= height));
 		}
@@ -721,16 +721,16 @@ public class MillingCutter : System.IDisposable
 		/// must be implemented in a subclass.
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: virtual CC_CLZ_Pair singleEdgeDropCanonical(const Point& u1, const Point& u2) const
-		protected virtual CC_CLZ_Pair singleEdgeDropCanonical(Point u1, Point u2)
+		protected virtual Tuple<double, double> singleEdgeDropCanonical(Point u1, Point u2)
 		{
-			return CC_CLZ_Pair(0.0,0.0); // dummy return value, better to throw an exception or assert?
+			return new Tuple<double, double>(0.0,0.0); // dummy return value, better to throw an exception or assert?
 		}
 
 	// HEIGHT / WIDTH
 		/// return the height of the cutter at radius r. redefine in subclass.
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: virtual double height(double r) const
-		protected virtual double height(double r)
+		public virtual double height(double r)
 		{
 			Debug.Assert(false);
 			return -1;
@@ -738,7 +738,7 @@ public class MillingCutter : System.IDisposable
 		/// return the width of the cutter at height h. redefine in subclass.
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: virtual double width(double h) const
-		protected virtual double width(double h)
+		public virtual double width(double h)
 		{
 			Debug.Assert(false);
 			return -1;

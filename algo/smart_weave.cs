@@ -210,7 +210,7 @@ public class SmartWeave : Weave
 						add_cl_vertex(upper, xi.Current, upper.x);
 
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-						add_vertex(xf.Current, yf, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), int); // the first crossing vertex
+						add_vertex(xf.Current, yf, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.INTEGER); // the first crossing vertex
 						xi.intersections_fibers.insert(yf);
 						yi.intersections_fibers.insert(xf);
 
@@ -226,7 +226,7 @@ public class SmartWeave : Weave
 								is_crossing = crossing_x(yf, ref yi, xi.Current, xf.Current);
 							}
 						}
-						add_vertex(xf.Current, (--yf), new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), int); // the last crossing vertex
+						add_vertex(xf.Current, (--yf), new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.INTEGER); // the last crossing vertex
 						xi.intersections_fibers.insert(yf);
 						yi.intersections_fibers.insert(xf);
 					}
@@ -267,7 +267,7 @@ public class SmartWeave : Weave
 						add_cl_vertex(upper, yi.Current, upper.y);
 
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-						if (add_vertex(xf, yf.Current, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), int))
+						if (add_vertex(xf, yf.Current, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.INTEGER))
 						{ // add_vertex returns false if vertex already exists
 							xi.intersections_fibers.insert(yf);
 							yi.intersections_fibers.insert(xf);
@@ -285,7 +285,7 @@ public class SmartWeave : Weave
 								is_crossing = crossing_y(xf, ref xi, yi.Current, yf.Current);
 							}
 						}
-						if (add_vertex((--xf), yf.Current, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), int))
+						if (add_vertex((--xf), yf.Current, new List<Interval>.Enumerator(xi), new List<Interval>.Enumerator(yi), VertexType.INTEGER))
 						{
 							xi.intersections_fibers.insert(yf);
 							yi.intersections_fibers.insert(xf);
@@ -449,27 +449,27 @@ public class SmartWeave : Weave
 
 					for (adj_itr = adjacent_vertices.GetEnumerator(); adj_itr < adjacent_vertices.end();)
 					{
-						Edge in = new Edge();
+						Edge @in = new Edge();
 						Edge @out = new Edge();
 						if (g.has_edge(adj_itr.Current, vertex))
 						{
-							in = g.edge(adj_itr.Current, vertex);
+							@in = g.edge(adj_itr.Current, vertex);
 							@out = g.edge(vertex, adj_itr.Current);
-							in_edges.Add(in);
+							in_edges.Add(@in);
 							out_edges.Add(@out);
 						}
 						else
 						{
-							in = g.add_edge(adj_itr.Current, vertex);
+							@in = g.add_edge(adj_itr.Current, vertex);
 							@out = g.add_edge(vertex, adj_itr.Current);
-							in_edges.Add(in);
+							in_edges.Add(@in);
 							out_edges.Add(@out);
 						}
 
 						if (g[adj_itr.Current].type == VertexType.CL)
 						{
-							g[in].prev = @out;
-							g[@out].next = in;
+							g[@in].prev = @out;
+							g[@out].next = @in;
 						}
 					}
 

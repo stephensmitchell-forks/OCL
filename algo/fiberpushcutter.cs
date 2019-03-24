@@ -179,7 +179,7 @@ public class FiberPushCutter : Operation
 			{
 				i = new Interval();
 //C++ TO C# CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-				cutter.pushCutter(f, i,it);
+				cutter.pushCutter(f, i, it.Current);
 				f.addInterval(i);
 				++nCalls;
 				if (i != null)
@@ -187,7 +187,9 @@ public class FiberPushCutter : Operation
 					i.Dispose();
 				}
 			}
+            /*
 			delete(tris);
+            */
 		}
 
 	// DATA

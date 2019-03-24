@@ -180,9 +180,9 @@ public abstract class Operation : System.IDisposable
 		/// size of bucket-node in KD-tree
 		protected uint bucketSize;
 		/// the MillingCutter used
-		protected readonly MillingCutter[] cutter;
+		protected MillingCutter cutter;
 		/// the STLSurf which we test against.
-		protected readonly STLSurf surf;
+		protected STLSurf surf;
 		/// root of a kd-tree
 		protected KDTree<Triangle> root;
 		/// number of threads to use

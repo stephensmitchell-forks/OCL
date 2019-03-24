@@ -79,7 +79,7 @@ public class EllipsePosition
 		/// set (s,t) pair to the position corresponding to diangle
 		public void setDiangle(double dia)
 		{
-			Debug.Assert(!Math.IsNaN(dia));
+			Debug.Assert(!double.IsNaN(dia));
 			diangle = dia;
 			setD();
 		}
@@ -155,7 +155,7 @@ public class EllipsePosition
 			// return P2( (a < 2 ? 1-a : a-3),
 			//           (a < 3 ? ((a > 1) ? 2-a : a) : a-4)
 			double d = diangle;
-			Debug.Assert(!Math.IsNaN(d));
+			Debug.Assert(!double.IsNaN(d));
 			while (d > 4.0) // make d a diangle in [0,4]
 			{
 				d -= 4.0;

@@ -121,7 +121,7 @@ public class ConeCutter : MillingCutter
 				normal.xyNormalize(); // make xy length of normal == 1.0
 				// cylindrical contact point case
 				// find the xy-coordinates of the cc-point
-				CCPoint cyl_cc_tmp = cl - radius * normal;
+				CCPoint cyl_cc_tmp = new CCPoint(cl - radius * normal);
 				cyl_cc_tmp.z = (1.0 / c) * (-d - a * cyl_cc_tmp.x - b * cyl_cc_tmp.y);
 				double cyl_cl_z = cyl_cc_tmp.z - length; // tip positioned here
 				cyl_cc_tmp.type = CCType.FACET_CYL;
@@ -175,11 +175,11 @@ public class ConeCutter : MillingCutter
 			double ccu;
 			if (hyperbola_case)
 			{
-				ccu = sign(m) * Math.Sqrt(ocl.GlobalMembers.square(radius) * ocl.GlobalMembers.square(m) * ocl.GlobalMembers.square(d) / (ocl.GlobalMembers.square(length) - ocl.GlobalMembers.square(radius) * ocl.GlobalMembers.square(m)));
+				ccu = Math.Sign(m) * Math.Sqrt(ocl.GlobalMembers.square(radius) * ocl.GlobalMembers.square(m) * ocl.GlobalMembers.square(d) / (ocl.GlobalMembers.square(length) - ocl.GlobalMembers.square(radius) * ocl.GlobalMembers.square(m)));
 			}
 			else
 			{
-				ccu = sign(m) * xu;
+				ccu = Math.Sign(m) * xu;
 			}
 			Point cc_tmp = new Point(ccu, d, 0.0); // cc-point in the XY plane
 			cc_tmp.z_projectOntoEdge(u1, u2);
@@ -282,12 +282,12 @@ public class ConeCutter : MillingCutter
 						else
 						{
 							// two intersection points with the base-circle
-							double x_pos = (det * dy + sign(dy) * dx * Math.Sqrt(discr)) / ocl.GlobalMembers.square(dr);
+							double x_pos = (det * dy + Math.Sign(dy) * dx * Math.Sqrt(discr)) / ocl.GlobalMembers.square(dr);
 							double y_pos = (-det * dx + Math.Abs(dy) * Math.Sqrt(discr)) / ocl.GlobalMembers.square(dr);
 							Point cl_pos = new Point(x_pos + p_base.x, y_pos + p_base.y);
 							double t_pos = f.tval(cl_pos);
 							// the same with "-" sign:
-							double x_neg = (det * dy - sign(dy) * dx * Math.Sqrt(discr)) / ocl.GlobalMembers.square(dr);
+							double x_neg = (det * dy - Math.Sign(dy) * dx * Math.Sqrt(discr)) / ocl.GlobalMembers.square(dr);
 							double y_neg = (-det * dx - Math.Abs(dy) * Math.Sqrt(discr)) / ocl.GlobalMembers.square(dr);
 							Point cl_neg = new Point(x_neg + p_base.x, y_neg + p_base.y);
 							double t_neg = f.tval(cl_neg);
@@ -389,7 +389,7 @@ public class ConeCutter : MillingCutter
 		{
 			// cone base circle is center_height above fiber
 			double t_cc = (f.p1.z + center_height - p1.z) / (p2.z - p1.z); // t-parameter of the cc-point, center_height above fiber
-			CCPoint cc_tmp = p1 + t_cc * (p2 - p1); // cc-point on the edge
+			CCPoint cc_tmp = new CCPoint(p1 + t_cc * (p2 - p1)); // cc-point on the edge
 			cc_tmp.type = CCType.EDGE_CONE_BASE;
 			return i.update_ifCCinEdgeAndTrue(t, cc_tmp, p1, p2, (true));
 		}
@@ -401,13 +401,13 @@ public class ConeCutter : MillingCutter
 //ORIGINAL LINE: bool cone_CC(const Point& tang, const Point& tip, const Point& base, const Point& p1, const Point& p2, const Fiber& f, Interval& i) const
 		protected bool cone_CC(Point tang, Point tip, Point @base, Point p1, Point p2, Fiber f, Interval i)
 		{
-			double u;
-			double t;
-			if (GlobalMembers.xy_line_line_intersection(f.p1, f.p2, u, tang, tip, t))
+			double u = 0;
+			double t = 0;
+			if (GlobalMembers.xy_line_line_intersection(f.p1, f.p2, ref u, tang, tip, ref t))
 			{
 				if ((t >= 0.0) && (t <= 1.0))
 				{
-					CCPoint cc_tmp = @base + t * (tip - @base);
+					CCPoint cc_tmp = new CCPoint(@base + t * (tip - @base));
 					cc_tmp.z_projectOntoEdge(p1, p2);
 					cc_tmp.type = CCType.EDGE_CONE;
 					return i.update_ifCCinEdgeAndTrue(u, cc_tmp, p1, p2, (true));

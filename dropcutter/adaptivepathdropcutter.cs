@@ -141,7 +141,7 @@ public class AdaptivePathDropCutter : Operation
 			double mid_t = start_t + (stop_t - start_t) / 2.0; // mid point sample
 			Debug.Assert(mid_t > start_t);
 			Debug.Assert(mid_t < stop_t);
-			CLPoint mid_cl = span.getPoint(mid_t);
+			CLPoint mid_cl = new CLPoint(span.getPoint(mid_t));
 			//std::cout << " apdc sampling at " << mid_t << "\n";
 			subOp[0].run(mid_cl);
 			double fw_step = (stop_cl - start_cl).xyNorm();
@@ -159,8 +159,8 @@ public class AdaptivePathDropCutter : Operation
 		/// flatness predicate for adaptive sampling
 		protected bool flat(CLPoint start_cl, CLPoint mid_cl, CLPoint stop_cl)
 		{
-			CLPoint v1 = mid_cl - start_cl;
-			CLPoint v2 = stop_cl - mid_cl;
+			CLPoint v1 = new CLPoint(mid_cl - start_cl);
+			CLPoint v2 = new CLPoint(stop_cl - mid_cl);
 			v1.normalize();
 			v2.normalize();
 			return (v1.dot(v2) > cosLimit);
@@ -174,8 +174,8 @@ public class AdaptivePathDropCutter : Operation
 			clpoints.Clear();
 			foreach (Span span in path.span_list)
 			{ // this loop could run in parallel, since spans don't depend on eachother
-				CLPoint start = span.getPoint(0.0);
-				CLPoint stop = span.getPoint(1.0);
+				CLPoint start = new CLPoint(span.getPoint(0.0));
+				CLPoint stop = new CLPoint(span.getPoint(1.0));
 				subOp[0].run(start);
 				subOp[0].run(stop);
 				clpoints.Add(start);
@@ -189,7 +189,7 @@ public class AdaptivePathDropCutter : Operation
 		protected double min_sampling;
 		/// the limit for dot-product used in flat()
 		protected double cosLimit;
-		protected readonly Path path;
+		protected Path path;
 		protected double minimumZ;
 		protected List<CLPoint> clpoints = new List<CLPoint>();
 }

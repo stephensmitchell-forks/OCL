@@ -62,6 +62,7 @@ public class Spread
 		public double val;
 		/// minimum or start value
 		public double start;
+        /*
 		/// comparison of Spread objects. Used for finding the largest spread
 		/// along which the next partition/cut is made.
 		public static bool spread_compare(Spread x, Spread y)
@@ -75,13 +76,33 @@ public class Spread
 				return false;
 			}
 		}
-}
+        */
+    }
 
-/// a kd-tree for storing triangles and fast searching for triangles
-/// that overlap the cutter
-//C++ TO C# CONVERTER TODO TASK: The original C++ template specifier was replaced with a C# generic specifier, which may not produce the same behavior:
-//ORIGINAL LINE: template <class BBObj>
-public class KDTree <BBObj> : System.IDisposable
+    /// comparison of Spread objects. Used for finding the largest spread
+    /// along which the next partition/cut is made.
+    public class SpreadComparer : IComparer<Spread>
+    {
+        /// comparison of Spread objects. Used for finding the largest spread
+        /// along which the next partition/cut is made.
+        public int Compare(Spread x, Spread y)
+        {
+            if (x.val > y.val)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+
+    /// a kd-tree for storing triangles and fast searching for triangles
+    /// that overlap the cutter
+    //C++ TO C# CONVERTER TODO TASK: The original C++ template specifier was replaced with a C# generic specifier, which may not produce the same behavior:
+    //ORIGINAL LINE: template <class Triangle>
+    public class KDTree <Triangle> : System.IDisposable
 {
 		public KDTree()
 		{
@@ -127,21 +148,21 @@ public class KDTree <BBObj> : System.IDisposable
 			dimensions.Add(5); // z
 		} // for Y-fibers
 		/// build the kd-tree based on a list of input objects
-		public void build(LinkedList<BBObj> list)
+		public void build(LinkedList<Triangle> list)
 		{
 			//std::cout << "KDTree::build() list.size()= " << list.size() << " \n";
 			root = build_node(list, 0, null);
 		}
 		/// search for overlap with input Bbox bb, return found objects
-		public LinkedList<BBObj> search(Bbox bb)
+		public LinkedList<Triangle> search(Bbox bb)
 		{
 			Debug.Assert(dimensions.Count > 0);
-			LinkedList<BBObj> tris = new LinkedList<BBObj>();
+			LinkedList<Triangle> tris = new LinkedList<Triangle>();
 			this.search_node(tris, bb, root);
 			return tris;
 		}
 		/// search for overlap with a MillingCutter c positioned at cl, return found objects
-		public LinkedList<BBObj> search_cutter_overlap(MillingCutter c, CLPoint cl)
+		public LinkedList<Triangle> search_cutter_overlap(MillingCutter c, CLPoint cl)
 		{
 			double r = c.getRadius();
 			// build a bounding-box at the current CL
@@ -155,7 +176,7 @@ public class KDTree <BBObj> : System.IDisposable
 //		string str();
 
 		/// build and return a KDNode containing list *tris at depth dep.
-		protected KDNode<BBObj> build_node(LinkedList<BBObj> tris, int dep, KDNode<BBObj> par)
+		protected KDNode<Triangle> build_node(LinkedList<Triangle> tris, int dep, KDNode<Triangle> par)
 		{ // parent node
 			//std::cout << "KDNode::build_node list.size()=" << tris->size() << "\n";
 
@@ -171,16 +192,16 @@ public class KDTree <BBObj> : System.IDisposable
 			if ((tris.Count <= bucketSize) || GlobalMembers.isZero_tol(spr.val))
 			{ // then return a bucket/leaf node
 				//std::cout << "KDNode::build_node BUCKET list.size()=" << tris->size() << "\n";
-				KDNode<BBObj> bucket; //  dim   cutv   parent   hi    lo   triangles depth
-				bucket = new KDNode<BBObj>(spr.d, cutvalue, par, null, null, tris, dep);
+				KDNode<Triangle> bucket; //  dim   cutv   parent   hi    lo   triangles depth
+				bucket = new KDNode<Triangle>(spr.d, cutvalue, par, null, null, tris, dep);
 				Debug.Assert(bucket.isLeaf);
 				spr = null;
 				return bucket; // this is the leaf/end of the recursion-tree
 			}
 			// build lists of triangles for hi and lo child nodes
-			LinkedList<BBObj> lolist = new LinkedList<BBObj>();
-			LinkedList<BBObj> hilist = new LinkedList<BBObj>();
-			foreach (BBObj t in * tris)
+			LinkedList<Triangle> lolist = new LinkedList<Triangle>();
+			LinkedList<Triangle> hilist = new LinkedList<Triangle>();
+			foreach (Triangle t in tris)
 			{ // loop through each triangle and put it in either lolist or hilist
 				if (t.bb[spr.d] > cutvalue)
 				{
@@ -198,7 +219,7 @@ public class KDTree <BBObj> : System.IDisposable
 			    std::cout << "kdtree: tris->size()= " << tris->size()<< "\n";
 			    std::cout << "kdtree: hilist.size()= " << hilist->size()<< "\n";
 			    std::cout << "kdtree: lolist.size()= " << lolist->size()<< "\n";
-			    BOOST_FOREACH(BBObj t, *tris) {
+			    BOOST_FOREACH(Triangle t, *tris) {
 			        std::cout << t << "\n";
 			        std::cout << t.bb << "\n";
 			    }
@@ -209,7 +230,7 @@ public class KDTree <BBObj> : System.IDisposable
 
 
 			// create the current node  dim     value    parent  hi   lo   trilist  depth
-			KDNode<BBObj> node = new KDNode<BBObj>(spr.d, cutvalue, par, null, null, null, dep);
+			KDNode<Triangle> node = new KDNode<Triangle>(spr.d, cutvalue, par, null, null, null, dep);
 			// create the child-nodes through recursion
 			//                    list    depth   parent
 			if (hilist.Count > 0)
@@ -238,7 +259,7 @@ public class KDTree <BBObj> : System.IDisposable
 		}
 
 		/// calculate the spread of list *tris                        
-		protected Spread calc_spread(LinkedList<BBObj> tris)
+		protected Spread calc_spread(LinkedList<Triangle> tris)
 		{
 			List<double> maxval = new List<double>(6);
 			List<double> minval = new List<double>(6);
@@ -253,9 +274,9 @@ public class KDTree <BBObj> : System.IDisposable
 				// find out the maximum spread
 				//std::cout << "calc_spread()...\n";
 				bool first = true;
-				foreach (BBObj t in * tris)
+				foreach (Triangle t in tris)
 				{ // check each triangle
-					for (uint m = 0;m < dimensions.Count;++m)
+					for (int m = 0; m < dimensions.Count; ++m)
 					{
 						// dimensions[m] is the dimensions we want to update
 						// t.bb[ dimensions[m] ]   is the update value
@@ -282,16 +303,17 @@ public class KDTree <BBObj> : System.IDisposable
 					}
 				}
 				List<Spread> spreads = new List<Spread>(); // calculate the spread along each dimension
-				for (uint m = 0;m < dimensions.Count;++m)
+				for (int m = 0;m < dimensions.Count;++m)
 				{ // dim,  spread, start
 					spreads.Add(new Spread(dimensions[m], maxval[dimensions[m]] - minval[dimensions[m]], minval[dimensions[m]]));
 				} // priority-queue could also be used ??
 				Debug.Assert(spreads.Count > 0);
-				//std::cout << " spreads.size()=" << spreads.size() << "\n";
-//C++ TO C# CONVERTER TODO TASK: The 'Compare' parameter of std::sort produces a boolean value, while the .NET Comparison parameter produces a tri-state result:
-//ORIGINAL LINE: std::sort(spreads.begin(), spreads.end(), Spread::spread_compare);
-				spreads.Sort(Spread.spread_compare); // sort the list
-				Spread s = new Spread(*spreads[0]); // this is the one we want to return
+                //std::cout << " spreads.size()=" << spreads.size() << "\n";
+                //C++ TO C# CONVERTER TODO TASK: The 'Compare' parameter of std::sort produces a boolean value, while the .NET Comparison parameter produces a tri-state result:
+                //ORIGINAL LINE: std::sort(spreads.begin(), spreads.end(), Spread::spread_compare);
+                SpreadComparer sc = new SpreadComparer();
+				spreads.Sort(sc); // sort the list
+				Spread s = spreads[0]; // this is the one we want to return
 				while (spreads.Count > 0)
 				{
 					spreads[spreads.Count - 1], spreads.RemoveAt(spreads.Count - 1) = null; // delete the others
@@ -304,12 +326,12 @@ public class KDTree <BBObj> : System.IDisposable
 
 		/// search kd-tree starting at *node, looking for overlap with bb, and placing
 		/// found objects in *tris
-		protected void search_node(LinkedList<BBObj> tris, Bbox bb, KDNode<BBObj> node)
+		protected void search_node(LinkedList<Triangle> tris, Bbox bb, KDNode<Triangle> node)
 		{
 			if (node.isLeaf)
 			{ // we found a bucket node, so add all triangles and return.
 
-				foreach (BBObj t in * (node.tris))
+				foreach (Triangle t in node.tris)
 				{
 						tris.AddLast(t);
 				}
@@ -361,7 +383,7 @@ public class KDTree <BBObj> : System.IDisposable
 		/// bucket size of tree
 		protected uint bucketSize;
 		/// pointer to root KDNode
-		protected KDNode<BBObj> root;
+		protected KDNode<Triangle> root;
 		/// the dimensions in this kd-tree
 		protected List<int> dimensions = new List<int>();
 }

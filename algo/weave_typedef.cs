@@ -38,7 +38,7 @@ public enum VertexType
 	CL_DONE,
 	ADJ,
 	TWOADJ,
-	INTEGER,
+	INTEGER, // was INT
 	FULLINT
 }
 

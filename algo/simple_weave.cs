@@ -160,8 +160,8 @@ public class SimpleWeave : Weave
 					Debug.Assert(xi.intersections2.Count >= 2);
 					if (xi.intersections2.Count == 2)
 					{
-						clVertexSet.erase(xv1);
-						clVertexSet.erase(xv2);
+						clVertexSet.Remove(xv1);
+						clVertexSet.Remove(xv2);
 						g.clear_vertex(xv1);
 						g.clear_vertex(xv2);
 						g.remove_vertex(xv1);
@@ -184,7 +184,7 @@ public class SimpleWeave : Weave
 		{
 			Vertex v = g.add_vertex();
 			g[v].position = position;
-			g[v].type = CL;
+			g[v].type = VertexType.CL;
 			ival.intersections2.Add(VertexPair(v, ipos)); // ?? this makes Interval depend on the WeaveGraph type
 			clVertexSet.Add(v);
 			return new Vertex(v);

@@ -200,10 +200,10 @@ public class Waterline : Operation
 		protected void init_fibers()
 		{
 			// std::cout << " Waterline::init_fibers()\n";
-			double minx = surf.bb.minpt.x - 2 cutter[0].getRadius();
-			double maxx = surf.bb.maxpt.x + 2 cutter[0].getRadius();
-			double miny = surf.bb.minpt.y - 2 cutter[0].getRadius();
-			double maxy = surf.bb.maxpt.y + 2 cutter[0].getRadius();
+			double minx = surf.bb.minpt.x - 2 *cutter.getRadius();
+			double maxx = surf.bb.maxpt.x + 2 *cutter.getRadius();
+			double miny = surf.bb.minpt.y - 2 *cutter.getRadius();
+			double maxy = surf.bb.maxpt.y + 2 *cutter.getRadius();
 			int Nx = (int)((maxx - minx) / sampling);
 			int Ny = (int)((maxy - miny) / sampling);
 			List<double> xvals = generate_range(minx, maxx, Nx);

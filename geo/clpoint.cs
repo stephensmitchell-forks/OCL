@@ -201,7 +201,7 @@ public class CLPoint : Point
 			cc = new CCPoint((clp.cc));
 			return this;
 		}
-
+        /*
 		/// addition
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: const CLPoint operator +(const CLPoint &p) const
@@ -209,10 +209,10 @@ public class CLPoint : Point
 		{
 			return new CLPoint(ImpliedObject.x + p.x, ImpliedObject.y + p.y, ImpliedObject.z + p.z);
 		}
-
+        */
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: const CLPoint operator +(const Point &p) const
-		public static new CLPoint operator + (CLPoint ImpliedObject, Point p)
+		public static CLPoint operator + (CLPoint ImpliedObject, Point p)
 		{
 			return new CLPoint(ImpliedObject.x + p.x, ImpliedObject.y + p.y, ImpliedObject.z + p.z);
 		}

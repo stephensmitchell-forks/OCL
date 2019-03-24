@@ -94,14 +94,14 @@ public abstract class Weave : System.IDisposable
 			while (clVertexSet.Count > 0)
 			{ // while unprocessed cl-vertices remain
 				List<Vertex> loop = new List<Vertex>(); // start on a new loop
-				Vertex current = *(clVertexSet.GetEnumerator());
+				Vertex current = clVertexSet.GetEnumerator();
 				Vertex first = new Vertex(current);
 
 				do
 				{ // traverse around the loop
 					Debug.Assert(g[current].type == VertexType.CL); // we only want cl-points in the loop
 					loop.Add(current);
-					clVertexSet.erase(current); // remove from set of unprocesser cl-verts
+					clVertexSet.Remove(current); // remove from set of unprocesser cl-verts
 					List<Edge> outEdges = g.out_edges(current); // find the edge to follow
 					//if (outEdges.size() != 1 )
 					//    std::cout << " outEdges.size() = " << outEdges.size() << "\n";

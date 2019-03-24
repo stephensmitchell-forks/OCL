@@ -144,8 +144,8 @@ public class BullCutter : MillingCutter
 			{ // now we want the offset-ellipse point to lie on the fiber
 				Point pseudo_cc = e.ePoint1(); // pseudo cc-point on ellipse and cylinder
 				Point pseudo_cc2 = e.ePoint2();
-				CCPoint cc = pseudo_cc.closestPoint(p1, p2);
-				CCPoint cc2 = pseudo_cc2.closestPoint(p1, p2);
+				CCPoint cc = new CCPoint(pseudo_cc.closestPoint(p1, p2));
+				CCPoint cc2 = new CCPoint(pseudo_cc2.closestPoint(p1, p2));
 				cc.type = CCType.EDGE_POS;
 				cc2.type = CCType.EDGE_POS;
 				Point cl = e.oePoint1() - new Point(0, 0, center_height);
