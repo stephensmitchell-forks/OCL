@@ -112,10 +112,10 @@ public class Bbox : System.IDisposable
 						return maxpt.z;
 						break;
 					default:
-						Debug.Assert(0);
+						Debug.Assert(false);
 						break;
 				}
-				Debug.Assert(0);
+				Debug.Assert(false);
 				return -1;
 			}
 		}
@@ -240,7 +240,7 @@ public class Bbox : System.IDisposable
 			addPoint(t.p[2]);
 			return;
 		}
-
+        /*
 		public static std::ostream operator << (std::ostream stream, Bbox b)
 		{
 		  stream << " Bbox \n";
@@ -248,7 +248,7 @@ public class Bbox : System.IDisposable
 		  stream << " max= " << b.maxpt << "\n";
 		  return stream;
 		}
-
+        */
 //DATA
 		/// the maximum point
 		public Point maxpt = new Point();

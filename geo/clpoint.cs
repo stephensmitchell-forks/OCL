@@ -95,6 +95,7 @@ public class CLPoint : Point
 
 		/// Pointer to the corresponding CCPoint
 		public CCPoint cc;
+        /*
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -104,7 +105,7 @@ public class CLPoint : Point
 			o << "CL(" << x << ", " << y << ", " << z << ") cc=" << cc;
 			return o.str();
 		}
-
+        */
 		/// if cc is in the edge p1-p2, test if clpoint needs to be lifted to z
 		/// if so, set cc = cc_tmp and return true
 		public bool liftZ_if_InsidePoints(double zin, CCPoint cc_tmp, Point p1, Point p2)

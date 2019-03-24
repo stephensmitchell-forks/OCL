@@ -282,7 +282,7 @@ public class CutterLocationSurface : Operation, System.IDisposable
 			}
 			return new boost::python.list(edge_list);
 		}
-
+        /*
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -292,7 +292,7 @@ public class CutterLocationSurface : Operation, System.IDisposable
 			o << "CutterLocationSurface (nVerts=" << g.num_vertices() << " , nEdges=" << g.num_edges() << "\n";
 			return o.str();
 		}
-
+        */
 
 	// DATA
 		/// the half-edge diagram 

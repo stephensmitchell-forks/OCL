@@ -110,8 +110,8 @@ public class FiberPushCutter : Operation
 			}
 			else
 			{
-				Console.Write(" ERROR: setXDirection() or setYDirection() must be called before setSTL() \n");
-				Debug.Assert(0);
+				Console.Write("ERROR: setXDirection() or setYDirection() must be called before setSTL()");
+				Debug.Assert(false);
 			}
 			Console.Write("BPC::setSTL() root->build()");
 			root.build(s.tris);
@@ -133,7 +133,7 @@ public class FiberPushCutter : Operation
 		/// run() is an error.
 		public override void run()
 		{
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 		public new void run(Fiber f)
 		{

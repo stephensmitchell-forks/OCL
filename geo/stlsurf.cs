@@ -111,12 +111,14 @@ public class STLSurf : System.IDisposable
 		public LinkedList<Triangle> tris = new LinkedList<Triangle>();
 		/// bounding-box
 		public Bbox bb = new Bbox();
+        /*
 		/// STLSurf string repr
 		public static std::ostream operator << (std::ostream stream, STLSurf s)
 		{
 		  stream << "STLSurf(N=" << s.tris.Count << ")";
 		  return stream;
 		}
+        */
 }
 
 } // end namespace

@@ -121,11 +121,12 @@ public class BatchPushCutter : Operation
 			}
 			else
 			{
-				std::cerr << "ERROR: setXDirection() or setYDirection() must be called before setSTL() \n";
-				Debug.Assert(0);
-			}
-			// std::cout << "BPC::setSTL() root->build()...";
-			root.build(s.tris);
+                
+				Console.WriteLine("ERROR: setXDirection() or setYDirection() must be called before setSTL()");
+				Debug.Assert(false);
+            }
+            // std::cout << "BPC::setSTL() root->build()...";
+            root.build(s.tris);
 			// std::cout << "done.\n";
 		}
 
@@ -175,7 +176,9 @@ public class BatchPushCutter : Operation
 			// std::cout << "BatchPushCutter1 with " << fibers->size() <<
 			//           " fibers and " << surf->tris.size() << " triangles..." << std::endl;
 			nCalls = 0;
+            /*
 			boost::progress_display show_progress = new boost::progress_display(fibers.Count);
+            */
 			foreach (Fiber f in * fibers)
 			{
 				foreach (Triangle t in surf.tris)
@@ -201,7 +204,9 @@ public class BatchPushCutter : Operation
 			//           " fibers and " << surf->tris.size() << " triangles..." << std::endl;
 			nCalls = 0;
 			LinkedList<Triangle> overlap_triangles;
+            /*
 			boost::progress_display show_progress = new boost::progress_display(fibers.Count);
+            */
 			foreach (Fiber f in * fibers)
 			{
 				CLPoint cl = new CLPoint();
@@ -219,7 +224,7 @@ public class BatchPushCutter : Operation
 				}
 				else
 				{
-					Debug.Assert(0);
+					Debug.Assert(false);
 				}
 				overlap_triangles = root.search_cutter_overlap(cutter, cl);
 				Debug.Assert(overlap_triangles.Count <= surf.size()); // can't possibly find more triangles than in the STLSurf
@@ -249,7 +254,9 @@ public class BatchPushCutter : Operation
 			//           " fibers and " << surf->tris.size() << " triangles." << std::endl;
 			// std::cout << " cutter = " << cutter->str() << "\n";
 			nCalls = 0;
+            /*
 			boost::progress_display show_progress = new boost::progress_display(fibers.Count);
+            */
 #if _OPENMP
 			Console.Write("OpenMP is enabled");
 			omp_set_num_threads(nthreads);

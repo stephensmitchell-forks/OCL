@@ -127,12 +127,12 @@ public abstract class Operation : System.IDisposable
 		/// run algorithm on a single input CLPoint
 		public virtual void run(CLPoint cl)
 		{
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 		/// run push-cutter type algorithm on input Fiber
 		public virtual void run(Fiber f)
 		{
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 
 		public virtual void reset()

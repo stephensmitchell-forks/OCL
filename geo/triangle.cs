@@ -169,7 +169,7 @@ public class Triangle : System.IDisposable
 			}
 			else
 			{
-				Debug.Assert(0);
+				Debug.Assert(false);
 				return false;
 			}
 
@@ -188,14 +188,14 @@ public class Triangle : System.IDisposable
 			calcNormal();
 			calcBB();
 		}
-
+        /*
 		/// Triangle string repr     
 		public static std::ostream operator << (std::ostream stream, Triangle t)
 		{
 		  stream << "T: " << t.p[0] << " " << t.p[1] << " " << t.p[2] << "n=" << t.n;
 		  return stream;
 		}
-
+        */
 		/// the three vertex Points of the Triangle
 		public Point[] p = Arrays.InitializeWithDefaultInstances<Point>(3); // vertices
 		/// normal vector

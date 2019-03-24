@@ -83,6 +83,7 @@ public class KDNode < BBObj > : System.IDisposable
 				}
 			}
 		}
+        /*
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -92,7 +93,7 @@ public class KDNode < BBObj > : System.IDisposable
 			o << "KDNode d:" << dim << " cv:" << cutval;
 			return o.str();
 		}
-
+        */
 	// DATA
 		/// level of node in tree 
 		public int depth;

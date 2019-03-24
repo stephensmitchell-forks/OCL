@@ -225,7 +225,7 @@ public class Fiber : System.IDisposable
 		{
 			return new ocl.Point(point(ints[n].lower));
 		}
-
+        /*
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, Fiber f)
 		{
@@ -233,7 +233,7 @@ public class Fiber : System.IDisposable
 		  stream << " fiber.p1=" << f.p1 << " fiber.p2 " << f.p2;
 		  return stream;
 		}
-
+        */
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool operator ==(const Fiber& other) const
 		public static bool operator == (Fiber ImpliedObject, Fiber other)

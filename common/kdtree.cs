@@ -161,8 +161,8 @@ public class KDTree <BBObj> : System.IDisposable
 
 			if (tris.Count == 0)
 			{ //this is a fatal error.
-				Console.Write("ERROR: KDTree::build_node() called with tris->size()==0 ! \n");
-				Debug.Assert(0);
+				Console.Write("ERROR: KDTree::build_node() called with tris->size()==0 !");
+				Debug.Assert(false);
 				return null;
 			}
 			Spread spr = calc_spread(tris); // calculate spread in order to know how to cut
@@ -244,8 +244,8 @@ public class KDTree <BBObj> : System.IDisposable
 			List<double> minval = new List<double>(6);
 			if (tris.Count == 0)
 			{
-				Console.Write(" ERROR, KDTree::calc_spread() called with tris->size()==0 ! \n");
-				Debug.Assert(0);
+				Console.Write("ERROR, KDTree::calc_spread() called with tris->size()==0 !");
+				Debug.Assert(false);
 				return null;
 			}
 			else

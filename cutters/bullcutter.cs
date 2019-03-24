@@ -61,7 +61,7 @@ public class BullCutter : MillingCutter
 		public BullCutter()
 		{
 			Console.Write(" usage: BullCutter( double diameter, double corner_radius, double length ) \n");
-			Debug.Assert(0);
+            Debug.Assert(false);
 		}
 
 		/// Create bull-cutter with diamter d, corner radius r, and length l.
@@ -87,14 +87,14 @@ public class BullCutter : MillingCutter
 		{
 			return new BullCutter(diameter + 2 * d, radius2 + d, length + d);
 		}
-
+        /*
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, BullCutter c)
 		{
 		  stream << "BullCutter(d=" << c.diameter << ", r1=" << c.radius1 << " r2=" << c.radius2 << ", L=" << c.length << ")";
 		  return stream;
 		}
-
+        
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
 		public new string str()
@@ -103,7 +103,7 @@ public class BullCutter : MillingCutter
 			o << this;
 			return o.str();
 		}
-
+        */
 
 
 		// push-cutter: vertex and facet handled by base-class
@@ -229,7 +229,7 @@ public class BullCutter : MillingCutter
 			}
 			else
 			{
-				Debug.Assert(0);
+				Debug.Assert(false);
 				return -1;
 			}
 		}

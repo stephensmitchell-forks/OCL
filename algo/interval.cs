@@ -209,7 +209,7 @@ public class Interval : System.IDisposable
 				return false;
 			}
 		}
-
+        /*
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -219,7 +219,7 @@ public class Interval : System.IDisposable
 			o << "I [" << lower << " , " << upper << " ]";
 			return o.str();
 		}
-
+        */
 
 		public CCPoint upper_cc = new CCPoint(); ///< cutter contact points at upper and lower are stored in upper_cc and lower_cc
 		public CCPoint lower_cc = new CCPoint(); ///< cutter contact point corresponding to lower

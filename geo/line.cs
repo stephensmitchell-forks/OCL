@@ -71,14 +71,14 @@ public class Line : System.IDisposable
 		public virtual void Dispose()
 		{
 		}
-
+        /*
 		/// text output
 		public static std::ostream operator << (std::ostream stream, Line l)
 		{
 		  stream << "(" << l.p1 << ", " << l.p2 << ")";
 		  return stream;
 		}
-
+        */
 		/// start point
 		public Point p1 = new Point();
 		/// end point

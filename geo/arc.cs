@@ -85,14 +85,14 @@ public class Arc : System.IDisposable
 		public virtual void Dispose()
 		{
 		}
-
+        /*
 		/// text output
 		public static std::ostream operator << (std::ostream stream, Arc a)
 		{
 		  stream << "(" << a.p1 << ", " << a.p2 << ", " << a.c << ", " << a.dir << ")";
 		  return stream;
 		}
-
+        */
 		/// start point
 		public Point p1 = new Point();
 		/// end point

@@ -118,7 +118,7 @@ public class EllipsePosition
 				return false;
 			}
 		}
-
+        /*
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -128,14 +128,14 @@ public class EllipsePosition
 			o << this;
 			return o.str();
 		}
-
+        
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, EllipsePosition pos)
 		{
 			stream << "(" << pos.s << " ," << pos.t << ")";
 			return stream;
 		}
-
+        */
 	// DATA
 		/// s-parameter in [-1, 1]
 		public double s;

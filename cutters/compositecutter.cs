@@ -92,7 +92,7 @@ public class CompositeCutter : MillingCutter
 		public new MillingCutter offsetCutter(double d)
 		{
 			Console.Write(" ERROR: not implemented.\n");
-			Debug.Assert(0);
+			Debug.Assert(false);
 			return new CylCutter(); //FIXME!
 		}
 
@@ -172,7 +172,7 @@ public class CompositeCutter : MillingCutter
 			}
 			return result;
 		}
-
+        /*
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
 		public new string str()
@@ -188,7 +188,7 @@ public class CompositeCutter : MillingCutter
 			}
 			return o.str();
 		}
-
+        */
 
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool vertexPush(const Fiber& f, Interval& i, const Triangle& t) const
@@ -307,7 +307,7 @@ public class CompositeCutter : MillingCutter
 					return n;
 				}
 			}
-			Debug.Assert(0);
+			Debug.Assert(false);
 			return 0;
 		}
 
@@ -327,7 +327,7 @@ public class CompositeCutter : MillingCutter
 			Console.Write(" Error, height= ");
 			Console.Write(h);
 			Console.Write(" has no index \n");
-			Debug.Assert(0);
+			Debug.Assert(false);
 			return 0;
 		}
 

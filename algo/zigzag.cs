@@ -111,6 +111,7 @@ public class ZigZag : System.IDisposable
 			pocket.Add(p);
 			bb.addPoint(p);
 		}
+        /*
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
 		public string str()
@@ -119,6 +120,7 @@ public class ZigZag : System.IDisposable
 			o << "ZigZag: pocket.size()=" << pocket.Count << std::endl;
 			return o.str();
 		}
+        */
 		/// the step over
 		protected double stepOver;
 		/// direction 

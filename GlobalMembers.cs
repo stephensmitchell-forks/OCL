@@ -255,7 +255,7 @@ namespace ocl
 			Console.Write(" ) and diangle=");
 			Console.Write(diangle);
 			Console.Write("\n");
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 		return diangle;
 	}
@@ -306,7 +306,7 @@ namespace ocl
 		if (fa * fb >= 0.0)
 		{ // check for opposite signs
 			Console.Write(" brent_zero() called with invalid interval [a,b] !\n");
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 		c = a; // set c sln equal to a sln
 		fc = fa;

@@ -206,7 +206,9 @@ public class BatchDropCutter : Operation
 			Console.Write(surf.tris.Count);
 			Console.Write(" triangles.\n");
 			nCalls = 0;
+            /*
 			boost::progress_display show_progress = new boost::progress_display(clpoints.Count);
+            */
 			LinkedList<Triangle> triangles_under_cutter;
 			foreach (CLPoint cl in * clpoints)
 			{ //loop through each CL-point
@@ -242,7 +244,9 @@ public class BatchDropCutter : Operation
 			Console.Write(" cl-points and ");
 			Console.Write(surf.tris.Count);
 			Console.Write(" triangles.\n");
+            /*
 			boost::progress_display show_progress = new boost::progress_display(clpoints.Count);
+            */
 			nCalls = 0;
 			int calls = 0;
 			int ntris = 0;
@@ -344,7 +348,9 @@ public class BatchDropCutter : Operation
 			Console.Write(" cl-points and ");
 			Console.Write(surf.tris.Count);
 			Console.Write(" triangles.\n");
+            /*
 			boost::progress_display show_progress = new boost::progress_display(clpoints.Count);
+            */
 			nCalls = 0;
 			int calls = 0;
 			int ntris = 0;

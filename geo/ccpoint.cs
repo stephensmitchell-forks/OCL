@@ -126,7 +126,7 @@ public class CCPoint : Point
 			type = CCType.NONE;
 			return this;
 		}
-
+        /*
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -136,13 +136,14 @@ public class CCPoint : Point
 			o << this;
 			return o.str();
 		}
-
+        
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, CCPoint p)
 		{
 		  stream << "CC(" << p.x << ", " << p.y << ", " << p.z << ", t=" << p.type << ")";
 		  return stream;
 		}
+        */
 }
 
 } // end namespace

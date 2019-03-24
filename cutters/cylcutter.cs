@@ -62,7 +62,7 @@ public class CylCutter : MillingCutter
 		public CylCutter()
 		{
 			// std::cout << " usage: CylCutter( double diameter, double length ) \n";
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 
 		/// create CylCutter with diameter d and length l
@@ -85,13 +85,14 @@ public class CylCutter : MillingCutter
 		{
 			return new BullCutter(diameter + 2 * d, d, length + d);
 		}
+        /*
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, CylCutter c)
 		{
 		  stream << "CylCutter (d=" << c.diameter << ", L=" << c.length << ")";
 		  return stream;
 		}
-
+        
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
 		public new string str()
@@ -100,7 +101,7 @@ public class CylCutter : MillingCutter
 			o << this;
 			return o.str();
 		}
-
+        */
 
 		// general purpose vertexPush, delegates to this->width(h) 
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:

@@ -60,7 +60,7 @@ public class ConeCutter : MillingCutter
 {
 		public ConeCutter()
 		{
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 
 		/// create a ConeCutter with specified maximum diameter and cone-angle
@@ -137,14 +137,14 @@ public class ConeCutter : MillingCutter
 				return result;
 			}
 		}
-
+        /*
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, ConeCutter c)
 		{
 		  stream << "ConeCutter (d=" << c.diameter << ", angle=" << c.angle << ", L=" << c.length << ")";
 		  return stream;
 		}
-
+        
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
 		public new string str()
@@ -153,7 +153,7 @@ public class ConeCutter : MillingCutter
 			o << this;
 			return o.str();
 		}
-
+        */
 
 		// cone sliced with vertical plane results in a hyperbola as the intersection curve
 		// find point where hyperbola and line slopes match

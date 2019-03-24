@@ -104,7 +104,7 @@ public class MillingCutter : System.IDisposable
 //ORIGINAL LINE: virtual MillingCutter* offsetCutter(double d) const
 		public virtual MillingCutter offsetCutter(double d)
 		{
-			Debug.Assert(0); // DON'T call me
+			Debug.Assert(false); // DON'T call me
 			return null;
 		}
 
@@ -497,7 +497,7 @@ public class MillingCutter : System.IDisposable
 			}
 			else
 			{
-				Debug.Assert(0);
+				Debug.Assert(false);
 			}
 
 			return result;
@@ -732,7 +732,7 @@ public class MillingCutter : System.IDisposable
 //ORIGINAL LINE: virtual double height(double r) const
 		protected virtual double height(double r)
 		{
-			Debug.Assert(0);
+			Debug.Assert(false);
 			return -1;
 		}
 		/// return the width of the cutter at height h. redefine in subclass.
@@ -740,7 +740,7 @@ public class MillingCutter : System.IDisposable
 //ORIGINAL LINE: virtual double width(double h) const
 		protected virtual double width(double h)
 		{
-			Debug.Assert(0);
+			Debug.Assert(false);
 			return -1;
 		}
 

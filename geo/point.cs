@@ -298,7 +298,7 @@ public class Point : System.IDisposable
 				Console.Write(p2);
 				Console.Write("\n");
 				Console.Write("point.cpp: xyClosestPoint ERROR!: in the xy-plane\n");
-				Debug.Assert(0);
+				Debug.Assert(false);
 				return new Point(0, 0, 0);
 			}
 
@@ -527,14 +527,14 @@ public class Point : System.IDisposable
 		{
 			return !(ImpliedObject == p);
 		}
-
+        /*
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, Point p)
 		{
 		  stream << "(" << p.x << ", " << p.y << ", " << p.z << ")";
 		  return stream;
 		}
-
+       
 		/// string repr
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
@@ -544,7 +544,7 @@ public class Point : System.IDisposable
 			o << this;
 			return o.str();
 		}
-
+        */
 		/// X coordinate
 		public double x;
 		/// Y coordinate

@@ -78,7 +78,7 @@ public abstract class Weave : System.IDisposable
 			}
 			else if (!f.empty())
 			{
-				Debug.Assert(0); // fiber must be either x or y
+				Debug.Assert(false); // fiber must be either x or y
 			}
 		}
 
@@ -135,7 +135,7 @@ public abstract class Weave : System.IDisposable
 			}
 			return new List< List<Point>>(loop_list);
 		}
-
+        /*
 		/// string representation
 
 		// string representation
@@ -147,7 +147,7 @@ public abstract class Weave : System.IDisposable
 			o << "  " << yfibers.Count << " Y-fibers\n";
 			return o.str();
 		}
-
+        */
 
 		// this can cause a build error when both face and vertex descriptors have the same type
 		// i.e. unsigned int (?)

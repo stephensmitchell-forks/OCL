@@ -60,8 +60,8 @@ public class BallCutter : MillingCutter
 {
 		public BallCutter()
 		{
-			Console.Write(" usage: BallCutter( double diameter, double length )\n");
-			Debug.Assert(0);
+			Console.Write("usage: BallCutter( double diameter, double length )");
+			Debug.Assert(false);
 		}
 
 		/// create a BallCutter with diameter d (radius d/2) and length l
@@ -84,13 +84,14 @@ public class BallCutter : MillingCutter
 		{
 			return new BallCutter(diameter + 2 * d, length + d);
 		}
+        /*
 		/// string repr
 		public static std::ostream operator << (std::ostream stream, BallCutter c)
 		{
 			stream << "BallCutter(d=" << c.diameter << ", r=" << c.radius << ", L=" << c.length << ")";
 			return stream;
 		}
-
+        
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: string str() const
 		public new string str()
@@ -99,7 +100,7 @@ public class BallCutter : MillingCutter
 			o << this;
 			return o.str();
 		}
-
+        */
 
 		// drop-cutter methods: vertex and facet are handled in base-class
 

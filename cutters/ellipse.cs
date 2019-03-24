@@ -262,7 +262,7 @@ public class Ellipse
 			Console.Write(this);
 			Console.Write("\n");
 			print_solutions();
-			Debug.Assert(0); // serious error if we get here!
+			Debug.Assert(false); // serious error if we get here!
 
 			return false;
 		}
@@ -357,7 +357,7 @@ public class Ellipse
 			return new ocl.Point(this.oePoint(EllipsePosition2));
 		}
 
-
+        /*
 		/// string repr
 
 		/// Ellipse string output
@@ -366,7 +366,7 @@ public class Ellipse
 		  stream << "Ellipse: cen=" << e.center << " a=" << e.a << " b=" << e.b << " ofs=" << e.offset;
 		  return stream;
 		}
-
+        */
 		/// set length of ellipse major axis
 		public void setA(double ain)
 		{
@@ -504,7 +504,7 @@ public class AlignedEllipse : Ellipse
 			}
 			else
 			{
-				Debug.Assert(0);
+				Debug.Assert(false);
 			}
 			// bracket root
 			EllipsePosition tmp = new EllipsePosition();

@@ -111,7 +111,7 @@ public class PointDropCutter : Operation
 		public override void run()
 		{
 			Console.Write("ERROR: can't call run() on PointDropCutter()\n");
-			Debug.Assert(0);
+			Debug.Assert(false);
 		}
 
 		/// first simple implementation of this operation
